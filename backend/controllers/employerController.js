@@ -2,6 +2,7 @@ import employerModel from "../models/employerModel.js";
 import userModel from "../models/userModel.js";
 import workVerificationModel from "../models/workVerificationModel.js";
 import jobModel from "../models/jobModel.js";
+import DocumentModel from "../models/documentModel.js";
 import validator from "validator";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
@@ -419,6 +420,49 @@ export const getJobApplicants = async (req, res) => {
     return res.status(200).json({ success: true, applicants: job.applicants || [] });
   } catch (error) {
     console.error("Get job applicants error:", error);
+    return res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+// UPDATE APPLICANT STATUS (accept / reject)
+export const updateApplicantStatus = async (req, res) => {
+  try {
+    const employerId = req.body.employerId || req.employerId;
+    const { jobId, applicantId } = req.params;
+    const { status } = req.body; // expected: 'accepted' or 'rejected'
+
+    if (!['accepted', 'rejected', 'applied'].includes(status)) {
+      return res.status(400).json({ success: false, message: 'Invalid status' });
+    }
+
+    const job = await jobModel.findOne({ _id: jobId, employer: employerId });
+    if (!job) return res.status(404).json({ success: false, message: 'Job not found' });
+
+    const applicant = job.applicants.id(applicantId) || job.applicants.find(a => String(a._id) === String(applicantId) || String(a.worker) === String(applicantId));
+    if (!applicant) return res.status(404).json({ success: false, message: 'Applicant not found' });
+
+    applicant.status = status;
+    await job.save();
+
+    return res.status(200).json({ success: true, message: 'Applicant status updated', applicant });
+  } catch (error) {
+    console.error('Update applicant status error:', error);
+    return res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+// GET a user's documents for employer view
+export const getUserDocumentsForEmployer = async (req, res) => {
+  try {
+    const employerId = req.body.employerId || req.employerId; // auth only
+    const { userId } = req.params;
+
+    if (!userId) return res.status(400).json({ success: false, message: 'Missing user id' });
+
+    const docs = await DocumentModel.find({ userId }).sort({ createdAt: -1 });
+    return res.status(200).json({ success: true, documents: docs });
+  } catch (error) {
+    console.error('Get user documents for employer error:', error);
     return res.status(500).json({ success: false, message: error.message });
   }
 };

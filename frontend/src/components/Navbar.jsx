@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 
@@ -13,6 +14,19 @@ const Navbar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
 
   const { userToken, setUserToken, userProfile } = useContext(AppContext);
+  const { t, i18n } = useTranslation();
+
+  const languages = [
+    { code: "en", label: "English" },
+    { code: "hi", label: "हिन्दी" },
+    { code: "bn", label: "বাংলা" },
+    { code: "ta", label: "தமிழ்" },
+    { code: "te", label: "తెలుగు" },
+    { code: "mr", label: "मराठी" },
+    { code: "gu", label: "ગુજરાતી" },
+    { code: "kn", label: "ಕನ್ನಡ" },
+    { code: "ml", label: "മലയാളം" },
+  ];
 
   const logout = () => {
     localStorage.removeItem("userToken");
@@ -36,28 +50,42 @@ const Navbar = () => {
       {/* ---------- DESKTOP NAV MENU ---------- */}
       <ul className="md:flex items-center gap-8 font-medium hidden flex-1 justify-center">
         <NavLink to="/user/dashboard">
-          <li className="py-1 hover:text-primary">Dashboard</li>
+          <li className="py-1 hover:text-primary">{t("nav.dashboard")}</li>
         </NavLink>
 
         <NavLink to="/user/jobs">
-          <li className="py-1 hover:text-primary">Jobs</li>
+          <li className="py-1 hover:text-primary">{t("nav.jobs")}</li>
         </NavLink>
 
         <NavLink to="/user/schemes">
-          <li className="py-1 hover:text-primary">Schemes</li>
+          <li className="py-1 hover:text-primary">{t("nav.schemes")}</li>
         </NavLink>
 
         <NavLink to="/user/documents">
-          <li className="py-1 hover:text-primary">Documents</li>
+          <li className="py-1 hover:text-primary">{t("nav.documents")}</li>
         </NavLink>
 
         <NavLink to="/user/profile">
-          <li className="py-1 hover:text-primary">My Profile</li>
+          <li className="py-1 hover:text-primary">{t("nav.myProfile")}</li>
         </NavLink>
       </ul>
 
       {/* ---------- RIGHT SIDE ---------- */}
       <div className="flex items-center gap-4">
+
+        {/* Language selector (always visible) */}
+        <select
+          value={i18n.language || "en"}
+          onChange={(e) => i18n.changeLanguage(e.target.value)}
+          className="border rounded px-2 py-1 text-sm mr-3"
+          aria-label={t("nav.language")}
+        >
+          {languages.map((l) => (
+            <option key={l.code} value={l.code}>
+              {l.label}
+            </option>
+          ))}
+        </select>
 
         {userToken ? (
           <div className="relative flex items-center gap-2">
@@ -86,7 +114,7 @@ const Navbar = () => {
                     setShowDropdown(false);
                   }}
                 >
-                  My Profile
+                  {t("nav.myProfile")}
                 </p>
 
                 <p
@@ -96,7 +124,7 @@ const Navbar = () => {
                     setShowDropdown(false);
                   }}
                 >
-                  My QR ID
+                  {t("nav.myQR")}
                 </p>
 
                 <p
@@ -106,7 +134,7 @@ const Navbar = () => {
                     setShowDropdown(false);
                   }}
                 >
-                  My Documents
+                  {t("nav.myDocuments")}
                 </p>
 
                 <p
@@ -116,7 +144,7 @@ const Navbar = () => {
                     setShowDropdown(false);
                   }}
                 >
-                  Logout
+                  {t("nav.logout")}
                 </p>
 
               </div>
@@ -128,7 +156,7 @@ const Navbar = () => {
             onClick={() => navigate("/")}
             className="bg-primary text-white px-8 py-2 rounded-full hidden md:block"
           >
-            Login
+            {t("nav.login")}
           </button>
         )}
 
@@ -154,22 +182,22 @@ const Navbar = () => {
 
         <ul className="flex flex-col gap-6 text-lg font-medium">
           <NavLink to="/user/dashboard" onClick={() => setShowMenu(false)}>
-            Dashboard
+            {t("nav.dashboard")}
           </NavLink>
           <NavLink to="/user/jobs" onClick={() => setShowMenu(false)}>
-            Jobs
+            {t("nav.jobs")}
           </NavLink>
           <NavLink to="/user/schemes" onClick={() => setShowMenu(false)}>
-            Schemes
+            {t("nav.schemes")}
           </NavLink>
           <NavLink to="/user/documents" onClick={() => setShowMenu(false)}>
-            Documents
+            {t("nav.documents")}
           </NavLink>
           <NavLink to="/user/profile" onClick={() => setShowMenu(false)}>
-            My Profile
+            {t("nav.myProfile")}
           </NavLink>
           <NavLink to="/user/qr" onClick={() => setShowMenu(false)}>
-            My QR ID
+            {t("nav.myQR")}
           </NavLink>
 
           {userToken && (
@@ -180,7 +208,7 @@ const Navbar = () => {
                 setShowMenu(false);
               }}
             >
-              Logout
+              {t('nav.logout')}
             </p>
           )}
         </ul>

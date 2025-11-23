@@ -1,17 +1,18 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { AppContext } from '../context/AppContext';
+import { useTranslation } from 'react-i18next';
 
 const AadhaarUrl = 'https://uidai.gov.in';
 const VoterUrl = 'https://www.nvsp.in/';
 
-const SchemeCard = ({ scheme, onInfo }) => {
+const SchemeCard = ({ scheme, onInfo, t }) => {
   return (
     <div className="bg-white border rounded p-4 shadow-sm">
       <div className="flex justify-between">
         <div>
           <h3 className="text-lg font-semibold">{scheme.name}</h3>
           <p className="text-sm text-gray-600">{scheme.scope}{scheme.state?.name ? ` • ${scheme.state.name}` : ''}</p>
-          <p className="mt-2 text-sm text-gray-700">{scheme.short_description || scheme.eligibility_text || 'No description available.'}</p>
+          <p className="mt-2 text-sm text-gray-700">{scheme.short_description || scheme.eligibility_text || t('schemes.noDescription', 'No description available.')}</p>
           <div className="mt-2 flex items-center gap-2">
             {scheme.categories && scheme.categories.slice(0,2).map((c, i) => (
               <span key={i} className="text-xs px-2 py-0.5 bg-gray-100 rounded">{c}</span>
@@ -20,9 +21,9 @@ const SchemeCard = ({ scheme, onInfo }) => {
           </div>
         </div>
         <div className="flex flex-col gap-2">
-          <button onClick={() => onInfo(scheme)} className="px-3 py-1 bg-indigo-600 text-white rounded text-sm">Details</button>
+          <button onClick={() => onInfo(scheme)} className="px-3 py-1 bg-indigo-600 text-white rounded text-sm">{t('schemes.details', 'Details')}</button>
           {scheme.apply_url && (
-            <a href={scheme.apply_url} target="_blank" rel="noreferrer" className="px-3 py-1 bg-green-600 text-white rounded text-sm text-center">Apply</a>
+            <a href={scheme.apply_url} target="_blank" rel="noreferrer" className="px-3 py-1 bg-green-600 text-white rounded text-sm text-center">{t('schemes.apply', 'Apply')}</a>
           )}
         </div>
       </div>
@@ -32,6 +33,7 @@ const SchemeCard = ({ scheme, onInfo }) => {
 
 const Schemes = () => {
   const { api } = useContext(AppContext);
+  const { t } = useTranslation();
   const [schemes, setSchemes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
@@ -171,30 +173,30 @@ const Schemes = () => {
   });
   const shown = filtered;
 
-  if (loading) return <div className="p-6">Loading schemes...</div>;
+  if (loading) return <div className="p-6">{t('schemes.loading')}</div>;
   if (fetchError) return <div className="p-6 text-red-600">{fetchError}</div>;
 
   return (
     <div className="p-6 max-w-screen-2xl mx-auto">
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-semibold">Schemes</h1>
+        <h1 className="text-2xl font-semibold">{t('schemes.title')}</h1>
       </div>
 
       <div className="bg-white p-4 rounded shadow mb-6">
         <div className="flex gap-4 flex-wrap items-center">
-          <input placeholder="Search schemes..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} className="border rounded p-2 flex-1 min-w-[200px]" />
+          <input placeholder={t('schemes.searchPlaceholder')} value={searchQuery} onChange={e => setSearchQuery(e.target.value)} className="border rounded p-2 flex-1 min-w-[200px]" />
 
-          <input placeholder="State code or name" value={stateCode} onChange={e => setStateCode(e.target.value)} className="border rounded p-2" />
+          <input placeholder={t('schemes.statePlaceholder')} value={stateCode} onChange={e => setStateCode(e.target.value)} className="border rounded p-2" />
 
           <div className="flex gap-2">
-            <button onClick={() => setTab('all')} className={`px-3 py-1 rounded ${tab==='all' ? 'bg-indigo-600 text-white' : 'bg-gray-100'}`}>All</button>
-            <button onClick={() => setTab('eligible')} className={`px-3 py-1 rounded ${tab==='eligible' ? 'bg-indigo-600 text-white' : 'bg-gray-100'}`}>Eligible</button>
+            <button onClick={() => setTab('all')} className={`px-3 py-1 rounded ${tab==='all' ? 'bg-indigo-600 text-white' : 'bg-gray-100'}`}>{t('schemes.all')}</button>
+            <button onClick={() => setTab('eligible')} className={`px-3 py-1 rounded ${tab==='eligible' ? 'bg-indigo-600 text-white' : 'bg-gray-100'}`}>{t('schemes.eligible')}</button>
           </div>
         </div>
 
         {/* category quick filters (preferred order, then derived) */}
         <div className="mt-3 flex gap-2 flex-wrap">
-          <button onClick={() => setSelectedCategory('')} className={`text-sm px-3 py-1 rounded ${selectedCategory==='' ? 'bg-indigo-600 text-white' : 'bg-gray-100'}`}>All Categories</button>
+          <button onClick={() => setSelectedCategory('')} className={`text-sm px-3 py-1 rounded ${selectedCategory==='' ? 'bg-indigo-600 text-white' : 'bg-gray-100'}`}>{t('schemes.allCategories')}</button>
           {(() => {
             const derived = [...new Set(schemes.flatMap((s) => s.categories || []))];
             const merged = [...new Set([...preferredCategories, ...derived])];
@@ -214,22 +216,22 @@ const Schemes = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         <div className="lg:col-span-9">
           {shown.length === 0 ? (
-            <div className="bg-white p-8 rounded shadow text-center">No schemes found.</div>
+            <div className="bg-white p-8 rounded shadow text-center">{t('schemes.noFound')}</div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {shown.map(s => <SchemeCard key={s._id} scheme={s} onInfo={(sc) => setSelectedScheme(sc)} />)}
+              {shown.map(s => <SchemeCard key={s._id} scheme={s} onInfo={(sc) => setSelectedScheme(sc)} t={t} />)}
             </div>
           )}
         </div>
 
         {/* Sidebar controls: caste, income, identity updates, apply */}
         <aside className="lg:col-span-3 bg-white p-4 rounded shadow sticky top-6">
-          <h3 className="font-semibold mb-3">Controls</h3>
+          <h3 className="font-semibold mb-3">{t('schemes.controls')}</h3>
 
           <div className="mb-3">
-            <label className="block text-sm text-gray-600 mb-1">State</label>
+            <label className="block text-sm text-gray-600 mb-1">{t('schemes.state')}</label>
             <select value={selectedStateCode} onChange={e => setSelectedStateCode(e.target.value)} className="w-full border rounded p-2">
-              <option value="">All states</option>
+              <option value="">{t('schemes.allStates')}</option>
               {indiaStates.map(s => <option key={s.code} value={s.code}>{s.name}</option>)}
             </select>
           </div>
@@ -244,14 +246,14 @@ const Schemes = () => {
               }}
               className={`flex-1 px-3 py-2 rounded text-white ${selectedStateCode ? 'bg-indigo-600' : 'bg-gray-300 cursor-not-allowed'}`}
             >
-              Find State Schemes
+              {t('schemes.findState')}
             </button>
-            <button onClick={resetFilters} className="px-3 py-2 rounded bg-gray-200">Reset / Show All</button>
+            <button onClick={resetFilters} className="px-3 py-2 rounded bg-gray-200">{t('schemes.reset')}</button>
           </div>
 
           <div className="mb-3">
-            <button onClick={() => window.open(AadhaarUrl, '_blank')} className="w-full px-3 py-2 bg-yellow-500 text-white rounded mb-2">Update Aadhaar</button>
-            <button onClick={() => window.open(VoterUrl, '_blank')} className="w-full px-3 py-2 bg-blue-600 text-white rounded">Update Voter ID</button>
+            <button onClick={() => window.open(AadhaarUrl, '_blank')} className="w-full px-3 py-2 bg-yellow-500 text-white rounded mb-2">{t('schemes.updateAadhaar')}</button>
+            <button onClick={() => window.open(VoterUrl, '_blank')} className="w-full px-3 py-2 bg-blue-600 text-white rounded">{t('schemes.updateVoter')}</button>
           </div>
 
           <div className="mb-3">
@@ -265,7 +267,7 @@ const Schemes = () => {
               className={`w-full px-3 py-2 rounded text-white ${selectedStateCode ? 'bg-green-600' : 'bg-gray-300 cursor-not-allowed'}`}
               disabled={!selectedStateCode}
             >
-              Apply for Caste Certificate (State)
+              {t('schemes.applyCaste')}
             </button>
           </div>
 
@@ -280,11 +282,11 @@ const Schemes = () => {
               className={`w-full px-3 py-2 rounded text-white ${selectedStateCode ? 'bg-green-600' : 'bg-gray-300 cursor-not-allowed'}`}
               disabled={!selectedStateCode}
             >
-              Apply for Income Certificate (State)
+              {t('schemes.applyIncome')}
             </button>
           </div>
 
-          <div className="mt-4 text-xs text-gray-500">Tip: select a state, click "Find State Schemes" to view eligible state schemes. Use the Apply buttons to open guidance for caste/income certificates for that state.</div>
+          <div className="mt-4 text-xs text-gray-500">{t('schemes.tip')}</div>
         </aside>
       </div>
 
@@ -296,30 +298,30 @@ const Schemes = () => {
                 <h2 className="text-xl font-semibold">{selectedScheme.name}</h2>
                 <p className="text-sm text-gray-600">{selectedScheme.scope}{selectedScheme.state?.name ? ` • ${selectedScheme.state.name}` : ''}</p>
               </div>
-              <button onClick={() => setSelectedScheme(null)} className="text-gray-500">Close</button>
+              <button onClick={() => setSelectedScheme(null)} className="text-gray-500">{t('schemes.close')}</button>
             </div>
             <div className="p-6 space-y-4">
               <div>
-                <h4 className="font-medium mb-2">About</h4>
-                <p className="text-gray-700">{selectedScheme.full_description || selectedScheme.short_description || 'No detailed description.'}</p>
+                <h4 className="font-medium mb-2">{t('schemes.about')}</h4>
+                <p className="text-gray-700">{selectedScheme.full_description || selectedScheme.short_description || t('schemes.noDetailed')}</p>
               </div>
 
               <div>
-                <h4 className="font-medium mb-2">Eligibility</h4>
-                <p className="text-gray-700">{selectedScheme.eligibility_text || 'Eligibility details not available.'}</p>
+                <h4 className="font-medium mb-2">{t('schemes.eligibility')}</h4>
+                <p className="text-gray-700">{selectedScheme.eligibility_text || t('schemes.noEligibility')}</p>
               </div>
 
               <div>
-                <h4 className="font-medium mb-2">Documents Required</h4>
+                <h4 className="font-medium mb-2">{t('schemes.documentsRequired')}</h4>
                 {selectedScheme.documents_required && selectedScheme.documents_required.length ? (
                   <ul className="list-disc ml-5 text-gray-700">
                     {selectedScheme.documents_required.map((d, i) => <li key={i}>{d}</li>)}
                   </ul>
-                ) : <p className="text-gray-700">Not specified.</p>}
+                ) : <p className="text-gray-700">{t('schemes.notSpecified')}</p>}
               </div>
 
               <div>
-                <small className="text-gray-500">Source: {selectedScheme.source || 'unknown'} • Last fetched: {selectedScheme.provenance?.fetched_at ? new Date(selectedScheme.provenance.fetched_at).toLocaleString() : 'unknown'}</small>
+                <small className="text-gray-500">{t('schemes.source')}: {selectedScheme.source || t('schemes.unknown')} • {t('schemes.lastFetched')}: {selectedScheme.provenance?.fetched_at ? new Date(selectedScheme.provenance.fetched_at).toLocaleString() : t('schemes.unknown')}</small>
               </div>
             </div>
           </div>

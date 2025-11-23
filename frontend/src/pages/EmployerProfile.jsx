@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 import EmployerHeader from "../components/employer/EmployerHeader";
 import { toast } from "react-toastify";
+import { useTranslation } from 'react-i18next';
 
 const EmployerProfile = () => {
   const { api, employerToken } = useContext(AppContext);
@@ -10,6 +11,7 @@ const EmployerProfile = () => {
   const [employer, setEmployer] = useState(null);
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState(false);
+    const { t } = useTranslation();
   const [documents, setDocuments] = useState([]);
   const [formData, setFormData] = useState({
     company: "",
@@ -51,7 +53,7 @@ const EmployerProfile = () => {
         }
       }
     } catch (error) {
-      toast.error(error.response?.data?.message || "Failed to load profile");
+      toast.error(error.response?.data?.message || t('employer.profile.loadFailed', 'Failed to load profile'));
     } finally {
       setLoading(false);
     }
@@ -66,36 +68,36 @@ const EmployerProfile = () => {
       if (response.data.success) {
         setEmployer(response.data.employer);
         setEditing(false);
-        toast.success("Profile updated successfully");
+        toast.success(t('employer.profile.updated', 'Profile updated successfully'));
       }
     } catch (error) {
-      toast.error(error.response?.data?.message || "Failed to update profile");
+      toast.error(error.response?.data?.message || t('employer.profile.updateFailed', 'Failed to update profile'));
     }
   };
 
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="text-xl">Loading...</div>
+        <div className="text-xl">{t('common.loading', 'Loading...')}</div>
       </div>
     );
   }
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <EmployerHeader title="Employer Profile" showBack backTo="/employer/dashboard" />
+      <EmployerHeader title={t('employer.profile.title', 'Employer Profile')} showBack backTo="/employer/dashboard" />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="bg-white rounded-lg shadow">
           <div className="p-6 border-b">
             <div className="flex justify-between items-center">
-              <h2 className="text-xl font-semibold text-gray-900">Company Details</h2>
+              <h2 className="text-xl font-semibold text-gray-900">{t('employer.profile.companyDetails', 'Company Details')}</h2>
               {!editing && (
                 <button
                   onClick={() => setEditing(true)}
                   className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
                 >
-                  Edit Profile
+                  {t('employer.profile.editProfile', 'Edit Profile')}
                 </button>
               )}
             </div>
@@ -106,9 +108,9 @@ const EmployerProfile = () => {
             <div className="mb-6">
               {(() => {
                 const docs = documents || [];
-                let badgeLabel = "No Documents Uploaded";
+                let badgeLabel = t('employer.profile.noDocuments');
                 let badgeClass = "bg-gray-100 text-gray-800";
-                let helperText = "You have not uploaded any employer documents. Upload documents to enable posting jobs and get verified.";
+                let helperText = t('employer.profile.noDocuments.helper');
 
                 if (docs.length > 0) {
                   const allVerified = docs.every((d) => (d.status || '').toLowerCase() === 'verified');
@@ -116,28 +118,28 @@ const EmployerProfile = () => {
                   const anyPending = docs.some((d) => (d.status || '').toLowerCase() === 'pending');
 
                   if (allVerified) {
-                    badgeLabel = "Verified";
+                    badgeLabel = t('employer.profile.verified');
                     badgeClass = "bg-green-100 text-green-800";
-                    helperText = "All submitted documents are verified by admin.";
+                    helperText = t('employer.profile.verifiedHelper');
                   } else if (anyRejected) {
-                    badgeLabel = "Rejected";
+                    badgeLabel = t('employer.profile.rejected');
                     badgeClass = "bg-red-100 text-red-800";
-                    helperText = "One or more documents were rejected. Please re-upload corrected documents.";
+                    helperText = t('employer.profile.rejectedHelper');
                   } else if (anyPending) {
-                    badgeLabel = "Pending Verification";
+                    badgeLabel = t('employer.profile.pendingVerification');
                     badgeClass = "bg-yellow-100 text-yellow-800";
-                    helperText = "Some documents are pending admin verification. You can still update your profile.";
+                    helperText = t('employer.profile.pendingHelper');
                   } else {
-                    badgeLabel = "Pending Verification";
+                    badgeLabel = t('employer.profile.pendingVerification');
                     badgeClass = "bg-yellow-100 text-yellow-800";
-                    helperText = "Documents are under review.";
+                    helperText = t('employer.profile.pendingHelper');
                   }
                 }
 
                 return (
                   <>
                     <span className={`px-3 py-1 rounded-full text-sm font-medium ${badgeClass}`}>
-                      Document Status: {badgeLabel}
+                      {t('employer.profile.documentStatus', 'Document Status')}: {badgeLabel}
                     </span>
                     <p className="text-sm text-gray-500 mt-2">{helperText}</p>
                   </>
@@ -149,7 +151,7 @@ const EmployerProfile = () => {
               <form onSubmit={handleUpdate} className="space-y-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Company Name
+                    {t('employer.profile.companyName', 'Company Name')}
                   </label>
                   <input
                     type="text"
@@ -170,12 +172,12 @@ const EmployerProfile = () => {
                     disabled
                     className="w-full px-3 py-2 border rounded-lg bg-gray-100 text-gray-500"
                   />
-                  <p className="text-xs text-gray-500 mt-1">Email cannot be changed</p>
+                  <p className="text-xs text-gray-500 mt-1">{t('employer.profile.emailCannotChange', 'Email cannot be changed')}</p>
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Phone
+                    {t('employer.profile.phone', 'Phone')}
                   </label>
                   <input
                     type="tel"
@@ -187,7 +189,7 @@ const EmployerProfile = () => {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Address
+                    {t('employer.profile.address', 'Address')}
                   </label>
                   <textarea
                     value={formData.address}
@@ -199,7 +201,7 @@ const EmployerProfile = () => {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Industry
+                    {t('employer.profile.industry', 'Industry')}
                   </label>
                   <input
                     type="text"
@@ -211,7 +213,7 @@ const EmployerProfile = () => {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Location
+                    {t('employer.profile.location', 'Location')}
                   </label>
                   <input
                     type="text"
@@ -226,7 +228,7 @@ const EmployerProfile = () => {
                     type="submit"
                     className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
                   >
-                    Save Changes
+                    {t('employer.profile.saveChanges', 'Save Changes')}
                   </button>
                   <button
                     type="button"
@@ -241,15 +243,15 @@ const EmployerProfile = () => {
                       });
                     }}
                     className="px-6 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300"
-                  >
-                    Cancel
+                    >
+                      {t('common.cancel', 'Cancel')}
                   </button>
                 </div>
               </form>
             ) : (
               <div className="space-y-4">
                 <div>
-                  <p className="text-sm font-medium text-gray-500">Company Name</p>
+                  <p className="text-sm font-medium text-gray-500">{t('employer.profile.companyName')}</p>
                   <p className="text-lg text-gray-900">{employer?.company || "N/A"}</p>
                 </div>
                 <div>
@@ -257,19 +259,19 @@ const EmployerProfile = () => {
                   <p className="text-lg text-gray-900">{employer?.email || "N/A"}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-500">Phone</p>
+                  <p className="text-sm font-medium text-gray-500">{t('employer.profile.phone')}</p>
                   <p className="text-lg text-gray-900">{employer?.phone || "N/A"}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-500">Address</p>
+                  <p className="text-sm font-medium text-gray-500">{t('employer.profile.address')}</p>
                   <p className="text-lg text-gray-900">{employer?.address || "N/A"}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-500">Industry</p>
+                  <p className="text-sm font-medium text-gray-500">{t('employer.profile.industry')}</p>
                   <p className="text-lg text-gray-900">{employer?.industry || "N/A"}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-500">Location</p>
+                  <p className="text-sm font-medium text-gray-500">{t('employer.profile.location')}</p>
                   <p className="text-lg text-gray-900">{employer?.location || "N/A"}</p>
                 </div>
               </div>

@@ -4,7 +4,7 @@ import axios from "axios";
 export const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
-  const backendUrl = "http://localhost:5000";
+  const backendUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 
   // AUTH STATES
   const [userToken, setUserToken] = useState(localStorage.getItem("userToken") || "");

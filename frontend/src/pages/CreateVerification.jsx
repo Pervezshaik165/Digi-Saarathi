@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 import EmployerHeader from "../components/employer/EmployerHeader";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 import { QRCodeSVG } from "qrcode.react";
 
 const CreateVerification = () => {
@@ -26,6 +27,7 @@ const CreateVerification = () => {
     feedback: "",
     workerId: "",
   });
+  const { t } = useTranslation();
 
   const availableSkills = [
     "Communication",
@@ -62,7 +64,7 @@ const CreateVerification = () => {
       );
       if (response.data.success) {
         setVerification(response.data.verification);
-        toast.success("Work verification created successfully!");
+        toast.success(t('createVerification.createdSuccess'));
       }
     } catch (error) {
       toast.error(error.response?.data?.message || "Failed to create verification");
@@ -90,7 +92,7 @@ const CreateVerification = () => {
   if (verification && showQRCode) {
     return (
       <div className="min-h-screen bg-gray-50">
-        <EmployerHeader title="QR Code Generated" showBack backTo="/employer/dashboard" />
+        <EmployerHeader title={t('createVerification.qrTitle')} showBack backTo="/employer/dashboard" />
 
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="bg-white rounded-lg shadow p-6">
@@ -110,10 +112,10 @@ const CreateVerification = () => {
                   />
                 </svg>
                 <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                  QR Code Generated Successfully!
+                  {t('createVerification.qrSuccess')}
                 </h2>
                 <p className="text-gray-600">
-                  Share this QR code or link to verify the worker's experience
+                  {t('createVerification.shareDesc')}
                 </p>
               </div>
 
@@ -125,7 +127,7 @@ const CreateVerification = () => {
 
               <div className="mb-6">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Verification Link
+                  {t('createVerification.verificationLinkLabel')}
                 </label>
                 <div className="flex gap-2">
                   <input
@@ -137,11 +139,11 @@ const CreateVerification = () => {
                   <button
                     onClick={() => {
                       navigator.clipboard.writeText(verificationUrl);
-                      toast.success("Link copied to clipboard!");
+                        toast.success(t('createVerification.copySuccess'));
                     }}
                     className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
                   >
-                    Copy
+                      {t('createVerification.copy')}
                   </button>
                 </div>
               </div>
@@ -167,13 +169,13 @@ const CreateVerification = () => {
                   }}
                   className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
                 >
-                  Create Another Verification
+                    {t('createVerification.createAnother')}
                 </button>
                 <button
                   onClick={() => navigate("/employer/verifications")}
                   className="px-6 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300"
                 >
-                  View All Verifications
+                  {t('createVerification.viewAll', 'View All Verifications')}
                 </button>
               </div>
             </div>
@@ -186,7 +188,7 @@ const CreateVerification = () => {
   if (verification && !showQRCode) {
     return (
       <div className="min-h-screen bg-gray-50">
-        <EmployerHeader title="Verification Created" showBack backTo="/employer/dashboard" />
+        <EmployerHeader title={t('createVerification.createdTitle')} showBack backTo="/employer/dashboard" />
 
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="bg-white rounded-lg shadow p-6">
@@ -206,10 +208,10 @@ const CreateVerification = () => {
                   />
                 </svg>
                 <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                  Work Verification Created Successfully!
+                  {t('createVerification.createdSuccess')}
                 </h2>
                 <p className="text-gray-600 mb-6">
-                  Your verification has been saved to the database. Generate a QR code to share it.
+                  {t('createVerification.createdDesc')}
                 </p>
               </div>
 
@@ -221,7 +223,7 @@ const CreateVerification = () => {
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
                   </svg>
-                  Generate QR Code
+                  {t('createVerification.generateQRCode')}
                 </button>
 
                 <div className="flex gap-4">
@@ -245,13 +247,13 @@ const CreateVerification = () => {
                     }}
                     className="flex-1 px-6 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300"
                   >
-                    Create Another Verification
+                    {t('createVerification.createAnother')}
                   </button>
                   <button
                     onClick={() => navigate("/employer/verifications")}
                     className="flex-1 px-6 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300"
                   >
-                    View All Verifications
+                    {t('createVerification.viewAll', 'View All Verifications')}
                   </button>
                 </div>
               </div>
@@ -264,18 +266,18 @@ const CreateVerification = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <EmployerHeader title="Create Work Verification" showBack backTo="/employer/dashboard" />
+    <EmployerHeader title={t('createVerification.enterDetailsTitle', 'Create Work Verification')} showBack backTo="/employer/dashboard" />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-6">
-            Enter Worker Details
+            <h2 className="text-xl font-semibold text-gray-900 mb-6">
+              {t('createVerification.enterDetailsTitle')}
           </h2>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Employee Full Name *
+                {t('createVerification.employeeFullName', 'Employee Full Name *')}
               </label>
               <select
                 value={formData.workerId}
@@ -296,16 +298,16 @@ const CreateVerification = () => {
                 className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
                 required
               >
-                <option value="">-- Select worker --</option>
+                <option value="">{t('createVerification.selectWorkerPlaceholder', '-- Select worker --')}</option>
                 {workersList.map((w) => (
                   <option key={w._id} value={w._id}>{w.name}{w.phone ? ` — ${w.phone}` : ''}</option>
                 ))}
-                <option value="other">Other / Not in list</option>
+                <option value="other">{t('createVerification.otherNotInList', 'Other / Not in list')}</option>
               </select>
 
               {formData.workerId === 'other' && (
                 <div className="mt-3">
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Employee Full Name *</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">{t('createVerification.employeeFullName', 'Employee Full Name *')}</label>
                   <input
                     type="text"
                     value={formData.employeeName}
@@ -319,7 +321,7 @@ const CreateVerification = () => {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Phone Number *
+                {t('createVerification.phoneNumber', 'Phone Number *')}
               </label>
               <input
                 type="tel"
@@ -327,7 +329,7 @@ const CreateVerification = () => {
                 onChange={(e) =>
                   setFormData({ ...formData, phoneNumber: e.target.value })
                 }
-                placeholder="e.g., +1234567890"
+                placeholder={t('createVerification.phonePlaceholder', 'e.g., +1234567890')}
                 className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
                 required
               />
@@ -335,7 +337,7 @@ const CreateVerification = () => {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Job Role/Position *
+                {t('createVerification.jobRole', 'Job Role/Position *')}
               </label>
               <input
                 type="text"
@@ -343,7 +345,7 @@ const CreateVerification = () => {
                 onChange={(e) =>
                   setFormData({ ...formData, jobRole: e.target.value })
                 }
-                placeholder="e.g., Software Developer, Sales Manager"
+                placeholder={t('createVerification.placeholders.title', 'e.g., Software Developer, Sales Manager')}
                 className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
                 required
               />
@@ -351,7 +353,7 @@ const CreateVerification = () => {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Type of Work *
+                {t('createVerification.typeOfWork', 'Type of Work *')}
               </label>
               <select
                 value={formData.typeOfWork}
@@ -361,16 +363,16 @@ const CreateVerification = () => {
                 className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
                 required
               >
-                <option value="Full-time">Full-time</option>
-                <option value="Part-time">Part-time</option>
-                <option value="Contract">Contract</option>
-                <option value="Internship">Internship</option>
+                <option value="Full-time">{t('createVerification.typeOptions.fulltime', 'Full-time')}</option>
+                <option value="Part-time">{t('createVerification.typeOptions.parttime', 'Part-time')}</option>
+                <option value="Contract">{t('createVerification.typeOptions.contract', 'Contract')}</option>
+                <option value="Internship">{t('createVerification.typeOptions.internship', 'Internship')}</option>
               </select>
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Skills Demonstrated
+                {t('createVerification.skillsLabel', 'Skills Demonstrated')}
               </label>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
                 {availableSkills.map((skill) => (
@@ -381,7 +383,7 @@ const CreateVerification = () => {
                       onChange={() => handleSkillToggle(skill)}
                       className="mr-2"
                     />
-                    <span className="text-sm">{skill}</span>
+                    <span className="text-sm">{t(`createVerification.skills.${skill}`, skill)}</span>
                   </label>
                 ))}
               </div>
@@ -389,7 +391,7 @@ const CreateVerification = () => {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Experience *
+                {t('createVerification.experienceLabel', 'Experience *')}
               </label>
               <input
                 type="text"
@@ -397,7 +399,7 @@ const CreateVerification = () => {
                 onChange={(e) =>
                   setFormData({ ...formData, experience: e.target.value })
                 }
-                placeholder="e.g., 0-2 years, 2-5 years, 5+ years"
+                placeholder={t('createVerification.placeholders.experience', 'e.g., 0-2 years, 2-5 years, 5+ years')}
                 className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
                 required
               />
@@ -406,7 +408,7 @@ const CreateVerification = () => {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Start Date *
+                  {t('createVerification.startDate', 'Start Date *')}
                 </label>
                 <input
                   type="date"
@@ -419,8 +421,8 @@ const CreateVerification = () => {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  End Date *
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  {t('createVerification.endDate', 'End Date *')}
                 </label>
                 <input
                   type="date"
@@ -436,7 +438,7 @@ const CreateVerification = () => {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Performance Rating * ({formData.rating} stars)
+                {t('createVerification.ratingLabel', 'Performance Rating *')} ({formData.rating} {t('createVerification.ratingSuffix', 'stars')})
               </label>
               <div className="flex gap-1">
                 {[1, 2, 3, 4, 5].map((star) => (
@@ -464,7 +466,7 @@ const CreateVerification = () => {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Recommended *
+                {t('createVerification.recommendedLabel', 'Recommended *')}
               </label>
               <select
                 value={formData.recommended}
@@ -474,16 +476,16 @@ const CreateVerification = () => {
                 className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
                 required
               >
-                <option value="Highly Recommend">Highly Recommend</option>
-                <option value="Recommend">Recommend</option>
-                <option value="Neutral">Neutral</option>
-                <option value="Not Recommend">Not Recommend</option>
+                <option value="Highly Recommend">{t('createVerification.recommendedOptions.highly', 'Highly Recommend')}</option>
+                <option value="Recommend">{t('createVerification.recommendedOptions.recommend', 'Recommend')}</option>
+                <option value="Neutral">{t('createVerification.recommendedOptions.neutral', 'Neutral')}</option>
+                <option value="Not Recommend">{t('createVerification.recommendedOptions.not', 'Not Recommend')}</option>
               </select>
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Feedback *
+                {t('createVerification.feedbackLabel', 'Feedback *')}
               </label>
               <textarea
                 value={formData.feedback}
@@ -491,7 +493,7 @@ const CreateVerification = () => {
                   setFormData({ ...formData, feedback: e.target.value })
                 }
                 rows={4}
-                placeholder="Provide detailed feedback about the worker's performance, achievements, and overall work quality..."
+                placeholder={t('createVerification.feedbackPlaceholder', "Provide detailed feedback about the worker's performance, achievements, and overall work quality...")}
                 className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
                 required
               />
@@ -503,14 +505,14 @@ const CreateVerification = () => {
                 onClick={() => navigate("/employer/dashboard")}
                 className="px-6 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300"
               >
-                Cancel
+                {t('createVerification.cancel', 'Cancel')}
               </button>
               <button
                 type="submit"
                 disabled={loading}
                 className="flex-1 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50"
               >
-                {loading ? "Creating..." : "Create Verification"}
+                {loading ? t('createVerification.creating', 'Creating...') : t('createVerification.createVerification', 'Create Verification')}
               </button>
             </div>
           </form>

@@ -6,6 +6,7 @@ import EmployerProfile from "./pages/EmployerProfile";
 import EmployerDocuments from "./pages/EmployerDocuments";
 import PostJob from "./pages/PostJob";
 import MyJobs from "./pages/MyJobs";
+import EmployerUserDocuments from "./pages/EmployerUserDocuments";
 import CreateVerification from "./pages/CreateVerification";
 import VerificationsGiven from "./pages/VerificationsGiven";
 import PublicVerification from "./pages/PublicVerification";
@@ -57,6 +58,7 @@ function App() {
         <Route path="/employer/profile" element={<EmployerProfile />} />
         <Route path="/employer/post-job" element={<PostJob />} />
         <Route path="/employer/jobs" element={<MyJobs />} />
+        <Route path="/employer/user/:userId/documents" element={<EmployerUserDocuments />} />
         <Route path="/employer/create-verification" element={<CreateVerification />} />
         <Route path="/employer/verifications" element={<VerificationsGiven />} />
 

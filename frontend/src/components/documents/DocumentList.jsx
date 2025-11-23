@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../context/AppContext";
 import { toast } from "react-toastify";
+import { useTranslation } from 'react-i18next';
 
 const DocumentList = () => {
   const { api, userToken, refreshDocs } = useContext(AppContext); 
+  const { t } = useTranslation();
   // ⬆ refreshDocs is a trigger from context and will fire when upload happens
 
   const [docs, setDocs] = useState([]);
@@ -20,7 +22,7 @@ const DocumentList = () => {
         setDocs(data.documents);
       }
     } catch (error) {
-      toast.error("Failed to fetch documents");
+      toast.error(t('documents.errors.fetchFailed'));
     }
     setLoading(false);
   };
@@ -37,25 +39,25 @@ const DocumentList = () => {
       });
 
       if (data.success) {
-        toast.success("Document deleted");
+        toast.success(t('documents.success.deleted'));
 
         // ⬇ instantly update UI without refreshing page
         setDocs((prev) => prev.filter((doc) => doc._id !== id));
       }
     } catch (error) {
-      toast.error("Delete failed");
+      toast.error(t('documents.errors.deleteFailed'));
     }
   };
 
   return (
     <div className="w-full md:w-1/2 bg-white p-6 rounded-xl shadow">
 
-      <h2 className="text-xl font-semibold mb-4">Your Documents</h2>
+      <h2 className="text-xl font-semibold mb-4">{t('documents.title')}</h2>
 
-      {loading && <p className="text-gray-500">Loading...</p>}
+      {loading && <p className="text-gray-500">{t('documents.loading')}</p>}
 
       {!loading && docs.length === 0 && (
-        <p className="text-gray-500">No documents uploaded yet.</p>
+        <p className="text-gray-500">{t('documents.noUploaded')}</p>
       )}
 
       <div className="space-y-4">
@@ -73,23 +75,23 @@ const DocumentList = () => {
                 rel="noreferrer"
                 className="text-blue-500 text-sm underline"
               >
-                View Document
+                {t('documents.view')}
               </a>
 
               {doc.status === 'rejected' && (
-                <div className="text-rose-600 text-sm mt-2">
-                  Rejected by admin — please reupload the correct document.
+                  <div className="text-rose-600 text-sm mt-2">
+                  {t('documents.status.rejected')}
                 </div>
               )}
 
               {doc.status === 'verified' && (
                 <div className="text-emerald-600 text-sm mt-2">
-                  Verified/Approved by admin.
+                  {t('documents.status.verified')}
                 </div>
               )}
               {doc.status === 'pending' && (
-                <div className="text-slate-500 text-sm mt-2">
-                  Pending verification by admin.
+                  <div className="text-slate-500 text-sm mt-2">
+                  {t('documents.status.pending')}
                 </div>
               )}
             </div>
@@ -99,7 +101,7 @@ const DocumentList = () => {
                 onClick={() => deleteDoc(doc._id)}
                 className="text-red-500 font-semibold"
               >
-                Delete
+                {t('documents.delete')}
               </button>
             </div>
           </div>

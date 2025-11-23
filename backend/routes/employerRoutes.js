@@ -13,6 +13,8 @@ import {
 	updateJob,
 	getJobs,
 	getJobApplicants,
+	updateApplicantStatus,
+	getUserDocumentsForEmployer,
 	uploadEmployerDocument,
 	getEmployerDocuments,
 	deleteEmployerDocument,
@@ -36,6 +38,8 @@ router.post("/job", authEmployer, createJob);
 router.put("/job/:jobId", authEmployer, updateJob);
 router.get("/jobs", authEmployer, getJobs);
 router.get("/job/:jobId/applicants", authEmployer, getJobApplicants);
+router.put("/job/:jobId/applicant/:applicantId/status", authEmployer, updateApplicantStatus);
+router.get("/user/:userId/documents", authEmployer, getUserDocumentsForEmployer);
 
 // Employer document management
 router.post("/documents", authEmployer, uploadEmployerDocument);

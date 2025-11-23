@@ -46,13 +46,22 @@ export const applyToJob = async (req, res) => {
     const job = await jobModel.findById(jobId);
     if (!job) return res.status(404).json({ success: false, message: 'Job not found' });
 
-    // Check already applied
-    const already = job.applicants && job.applicants.some(a => a.worker?.toString() === userId.toString());
-    if (already) return res.status(400).json({ success: false, message: 'You have already applied to this job' });
-
+    // Check if user already applied
     job.applicants = job.applicants || [];
-    job.applicants.push({ worker: userId });
-    await job.save();
+    const existing = job.applicants.find(a => a.worker?.toString() === userId.toString());
+    if (existing) {
+      // allow re-apply only if previously rejected
+      if ((existing.status || 'applied') === 'rejected') {
+        existing.status = 'applied';
+        existing.appliedAt = Date.now();
+        await job.save();
+      } else {
+        return res.status(400).json({ success: false, message: 'You have already applied to this job' });
+      }
+    } else {
+      job.applicants.push({ worker: userId, status: 'applied' });
+      await job.save();
+    }
 
     // optionally populate applicant info
     await job.populate('employer', 'company');

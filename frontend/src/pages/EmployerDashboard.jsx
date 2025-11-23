@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 import EmployerHeader from "../components/employer/EmployerHeader";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const EmployerDashboard = () => {
   const { api, employerToken } = useContext(AppContext);
@@ -16,6 +17,7 @@ const EmployerDashboard = () => {
   const [recentVerifications, setRecentVerifications] = useState([]);
   const [recentJobs, setRecentJobs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (!employerToken) {
@@ -37,7 +39,7 @@ const EmployerDashboard = () => {
         setRecentJobs(response.data.recentJobs || []);
       }
     } catch (error) {
-      toast.error(error.response?.data?.message || "Failed to load dashboard");
+      toast.error(error.response?.data?.message || t('common.loading', 'Failed to load dashboard'));
     } finally {
       setLoading(false);
     }
@@ -46,22 +48,22 @@ const EmployerDashboard = () => {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="text-xl">Loading...</div>
+        <div className="text-xl">{t('common.loading', 'Loading...')}</div>
       </div>
     );
   }
 
   return (
     <div className=" min-h-screen bg-gray-50">
-      <EmployerHeader title="Employer's Dashboard" />
+      <EmployerHeader title={t('employer.dashboard.title')} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <div className="bg-white rounded-lg shadow p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600">Verifications Given</p>
+                <p className="text-sm font-medium text-gray-600">{t('employer.dashboard.stats.verificationsGiven')}</p>
                 <p className="text-3xl font-bold text-gray-900 mt-2">{stats.verificationsGiven}</p>
               </div>
               <div className="p-3 bg-blue-100 rounded-full">
@@ -74,14 +76,14 @@ const EmployerDashboard = () => {
               onClick={() => navigate("/employer/verifications")}
               className="mt-4 text-sm text-blue-600 hover:text-blue-800"
             >
-              View all →
+              {t('employer.dashboard.recentVerifications.viewAll')}
             </button>
           </div>
 
           <div className="bg-white rounded-lg shadow p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600">Jobs Posted</p>
+                <p className="text-sm font-medium text-gray-600">{t('employer.dashboard.stats.jobsPosted')}</p>
                 <p className="text-3xl font-bold text-gray-900 mt-2">{stats.jobsPosted}</p>
               </div>
               <div className="p-3 bg-green-100 rounded-full">
@@ -94,14 +96,14 @@ const EmployerDashboard = () => {
               onClick={() => navigate("/employer/jobs")}
               className="mt-4 text-sm text-green-600 hover:text-green-800"
             >
-              View all →
+              {t('employer.dashboard.recentJobs.viewAll')}
             </button>
           </div>
 
           <div className="bg-white rounded-lg shadow p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600">Documents Verified</p>
+                <p className="text-sm font-medium text-gray-600">{t('employer.dashboard.stats.documentsVerified')}</p>
                 <p className="text-3xl font-bold text-gray-900 mt-2">{stats.documentsVerified}{stats.documentsUploaded ? `/${stats.documentsUploaded}` : ''}</p>
               </div>
               <div className="p-3 bg-purple-100 rounded-full">
@@ -115,7 +117,7 @@ const EmployerDashboard = () => {
 
         {/* Quick Actions */}
         <div className="mb-8">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Quick Actions</h2>
+          <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('employer.dashboard.quickActions.title')}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <button
               onClick={() => navigate("/employer/create-verification")}
@@ -126,8 +128,8 @@ const EmployerDashboard = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                 </svg>
                 <div>
-                  <p className="font-semibold">Create Work Verification</p>
-                  <p className="text-sm text-blue-100">Verify a worker's experience</p>
+                  <p className="font-semibold">{t('employer.dashboard.quickActions.createVerification')}</p>
+                    <p className="text-sm text-blue-100">{t('employer.dashboard.quickActions.createVerificationDesc')}</p>
                 </div>
               </div>
             </button>
@@ -138,13 +140,13 @@ const EmployerDashboard = () => {
                   const docs = response.data.documents || [];
                   const hasUploaded = docs.length > 0;
                   const allVerified = hasUploaded && docs.every(d => (d.status || '').toString().toLowerCase() === 'verified');
-                  if (hasUploaded && allVerified) {
+                    if (hasUploaded && allVerified) {
                     navigate('/employer/post-job');
                   } else {
-                    toast.warn('You must upload at least one document and ensure none are pending or rejected. Please upload documents and wait for admin verification.');
+                    toast.warn(t('employer.dashboard.quickActions.postJobWarning'));
                   }
                 } catch (err) {
-                  toast.error('Failed to check documents. Please try again.');
+                  toast.error(t('employer.dashboard.quickActions.postJobCheckFailed', 'Failed to check documents. Please try again.'));
                 }
               }}
               className="bg-green-600 text-white px-6 py-4 rounded-lg shadow hover:bg-green-700 transition text-left"
@@ -154,8 +156,8 @@ const EmployerDashboard = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                 </svg>
                 <div>
-                  <p className="font-semibold">Post a Job</p>
-                  <p className="text-sm text-green-100">Create a new job posting</p>
+                  <p className="font-semibold">{t('employer.dashboard.quickActions.postJob')}</p>
+                  <p className="text-sm text-green-100">{t('employer.dashboard.quickActions.postJobDesc')}</p>
                 </div>
               </div>
             </button>
@@ -167,11 +169,11 @@ const EmployerDashboard = () => {
           {/* Recent Verifications */}
           <div className="bg-white rounded-lg shadow">
             <div className="p-6 border-b">
-              <h2 className="text-xl font-semibold text-gray-900">Recent Verifications</h2>
+              <h2 className="text-xl font-semibold text-gray-900">{t('employer.dashboard.recentVerifications.title')}</h2>
             </div>
             <div className="p-6">
               {recentVerifications.length === 0 ? (
-                <p className="text-gray-500 text-center py-4">No verifications yet</p>
+                <p className="text-gray-500 text-center py-4">{t('employer.dashboard.recentVerifications.none')}</p>
               ) : (
                 <div className="space-y-4">
                   {recentVerifications.map((verification) => (
@@ -213,7 +215,7 @@ const EmployerDashboard = () => {
                   onClick={() => navigate("/employer/verifications")}
                   className="mt-4 w-full text-sm text-blue-600 hover:text-blue-800"
                 >
-                  View all verifications →
+                  {t('employer.dashboard.recentVerifications.viewAll')}
                 </button>
               )}
             </div>
@@ -222,11 +224,11 @@ const EmployerDashboard = () => {
           {/* Recent Jobs */}
           <div className="bg-white rounded-lg shadow">
             <div className="p-6 border-b">
-              <h2 className="text-xl font-semibold text-gray-900">Recent Jobs</h2>
+              <h2 className="text-xl font-semibold text-gray-900">{t('employer.dashboard.recentJobs.title')}</h2>
             </div>
             <div className="p-6">
               {recentJobs.length === 0 ? (
-                <p className="text-gray-500 text-center py-4">No jobs posted yet</p>
+                <p className="text-gray-500 text-center py-4">{t('employer.dashboard.recentJobs.none')}</p>
               ) : (
                 <div className="space-y-4">
                   {recentJobs.map((job) => (
@@ -257,7 +259,7 @@ const EmployerDashboard = () => {
                   onClick={() => navigate("/employer/jobs")}
                   className="mt-4 w-full text-sm text-green-600 hover:text-green-800"
                 >
-                  View all jobs →
+                  {t('employer.dashboard.recentJobs.viewAll')}
                 </button>
               )}
             </div>

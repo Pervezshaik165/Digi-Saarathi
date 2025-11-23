@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const PublicVerification = () => {
   const { qrToken } = useParams();
   const [verification, setVerification] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetchVerification();
@@ -19,7 +21,7 @@ const PublicVerification = () => {
         setVerification(response.data.verification);
       }
     } catch (error) {
-      toast.error(error.response?.data?.message || "Verification not found");
+      toast.error(error.response?.data?.message || t('publicVerification.notFound'));
     } finally {
       setLoading(false);
     }
@@ -28,7 +30,7 @@ const PublicVerification = () => {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-xl">Loading...</div>
+        <div className="text-xl">{t('publicVerification.loading')}</div>
       </div>
     );
   }
@@ -37,8 +39,8 @@ const PublicVerification = () => {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">Verification Not Found</h1>
-          <p className="text-gray-600">The verification link is invalid or has expired.</p>
+          <h1 className="text-2xl font-bold text-gray-900 mb-2">{t('publicVerification.notFound')}</h1>
+          <p className="text-gray-600">{t('publicVerification.invalidLink')}</p>
         </div>
       </div>
     );
@@ -64,32 +66,32 @@ const PublicVerification = () => {
                   d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
                 />
               </svg>
-              <h1 className="text-3xl font-bold">Work Verification</h1>
+              <h1 className="text-3xl font-bold">{t('publicVerification.title')}</h1>
             </div>
-            <p className="text-blue-100">Verified work experience certificate</p>
+            <p className="text-blue-100">{t('publicVerification.subtitle')}</p>
           </div>
 
           {/* Content */}
           <div className="p-8 space-y-6">
             {/* Worker Info */}
             <div className="border-b pb-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Employee Information</h2>
+              <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('publicVerification.employeeInfo')}</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <p className="text-sm font-medium text-gray-500">Full Name</p>
+                  <p className="text-sm font-medium text-gray-500">{t('publicVerification.fullName')}</p>
                   <p className="text-lg text-gray-900">
                     {verification.worker?.name || verification.employeeName}
                   </p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-500">Phone Number</p>
+                  <p className="text-sm font-medium text-gray-500">{t('publicVerification.phoneNumber')}</p>
                   <p className="text-lg text-gray-900">
                     {verification.phoneNumber || verification.worker?.phone || "N/A"}
                   </p>
                 </div>
                 {verification.worker?.email && (
                   <div>
-                    <p className="text-sm font-medium text-gray-500">Email</p>
+                    <p className="text-sm font-medium text-gray-500">{t('publicVerification.email')}</p>
                     <p className="text-lg text-gray-900">{verification.worker.email}</p>
                   </div>
                 )}
@@ -98,32 +100,32 @@ const PublicVerification = () => {
 
             {/* Job Details */}
             <div className="border-b pb-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Job Details</h2>
+              <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('publicVerification.jobDetails')}</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <p className="text-sm font-medium text-gray-500">Job Role</p>
+                  <p className="text-sm font-medium text-gray-500">{t('publicVerification.jobRole')}</p>
                   <p className="text-lg text-gray-900">{verification.jobRole}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-500">Type of Work</p>
+                  <p className="text-sm font-medium text-gray-500">{t('publicVerification.typeOfWork')}</p>
                   <p className="text-lg text-gray-900">{verification.typeOfWork || "N/A"}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-500">Company</p>
+                  <p className="text-sm font-medium text-gray-500">{t('publicVerification.company')}</p>
                   <p className="text-lg text-gray-900">{verification.companyName}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-500">Experience</p>
+                  <p className="text-sm font-medium text-gray-500">{t('publicVerification.experience')}</p>
                   <p className="text-lg text-gray-900">{verification.experience || "N/A"}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-500">Start Date</p>
+                  <p className="text-sm font-medium text-gray-500">{t('publicVerification.startDate')}</p>
                   <p className="text-lg text-gray-900">
                     {new Date(verification.startDate).toLocaleDateString()}
                   </p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-500">End Date</p>
+                  <p className="text-sm font-medium text-gray-500">{t('publicVerification.endDate')}</p>
                   <p className="text-lg text-gray-900">
                     {new Date(verification.endDate).toLocaleDateString()}
                   </p>
@@ -134,7 +136,7 @@ const PublicVerification = () => {
             {/* Skills */}
             {verification.skills && verification.skills.length > 0 && (
               <div className="border-b pb-6">
-                <h2 className="text-xl font-semibold text-gray-900 mb-4">Skills Demonstrated</h2>
+                <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('publicVerification.skillsDemonstrated')}</h2>
                 <div className="flex flex-wrap gap-2">
                   {verification.skills.map((skill, idx) => (
                     <span
@@ -150,10 +152,10 @@ const PublicVerification = () => {
 
             {/* Performance */}
             <div className="border-b pb-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Performance Evaluation</h2>
+              <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('publicVerification.performanceEvaluation')}</h2>
               <div className="space-y-4">
                 <div>
-                  <p className="text-sm font-medium text-gray-500 mb-2">Rating</p>
+                  <p className="text-sm font-medium text-gray-500 mb-2">{t('publicVerification.rating')}</p>
                   <div className="flex items-center gap-1">
                     {[...Array(5)].map((_, i) => (
                       <svg
@@ -173,14 +175,14 @@ const PublicVerification = () => {
                   </div>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-500 mb-2">Recommended</p>
+                  <p className="text-sm font-medium text-gray-500 mb-2">{t('publicVerification.recommended')}</p>
                   <p className="text-lg font-semibold text-gray-900">
                     {verification.recommended || verification.recommendation || "N/A"}
                   </p>
                 </div>
                 {verification.feedback && (
                   <div>
-                    <p className="text-sm font-medium text-gray-500 mb-2">Feedback</p>
+                    <p className="text-sm font-medium text-gray-500 mb-2">{t('publicVerification.feedback')}</p>
                     <p className="text-lg text-gray-900 whitespace-pre-wrap">
                       {verification.feedback}
                     </p>
@@ -188,7 +190,7 @@ const PublicVerification = () => {
                 )}
                 {!verification.feedback && verification.comments && (
                   <div>
-                    <p className="text-sm font-medium text-gray-500 mb-2">Comments</p>
+                    <p className="text-sm font-medium text-gray-500 mb-2">{t('publicVerification.comments')}</p>
                     <p className="text-lg text-gray-900 whitespace-pre-wrap">
                       {verification.comments}
                     </p>
@@ -200,7 +202,7 @@ const PublicVerification = () => {
             {/* Employer Info */}
             {verification.employer && (
               <div>
-                <h2 className="text-xl font-semibold text-gray-900 mb-4">Verified By</h2>
+                <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('publicVerification.verifiedBy')}</h2>
                 <div className="bg-gray-50 rounded-lg p-4">
                   <p className="font-semibold text-gray-900">{verification.employer.company}</p>
                   {verification.employer.email && (
@@ -219,7 +221,7 @@ const PublicVerification = () => {
             {/* Verification Date */}
             <div className="pt-4 border-t">
               <p className="text-sm text-gray-500">
-                Verification issued on {new Date(verification.createdAt).toLocaleDateString()}
+                {t('publicVerification.issued')} {new Date(verification.createdAt).toLocaleDateString()}
               </p>
             </div>
           </div>
@@ -227,7 +229,7 @@ const PublicVerification = () => {
 
         {/* Footer */}
         <div className="mt-8 text-center text-sm text-gray-500">
-          <p>This is a verified work experience certificate issued by Digi Saarathi</p>
+          <p>{t('publicVerification.footerText')}</p>
         </div>
       </div>
     </div>

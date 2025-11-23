@@ -16,6 +16,9 @@ connectDB();
 
 const app = express();
 
+const allowedOrigins = (process.env.CORS_ORIGINS || "http://localhost:5173,http://localhost:5174")
+  .split(",");
+
 // Allow the custom `token` header used by the frontend and common auth headers
 app.use(cors({
     origin: true,

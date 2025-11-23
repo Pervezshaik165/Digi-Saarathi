@@ -21,7 +21,8 @@ const jobSchema = new mongoose.Schema(
     // Applicants
     applicants: [{
       worker: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-      appliedAt: { type: Date, default: Date.now }
+      appliedAt: { type: Date, default: Date.now },
+      status: { type: String, enum: ["applied", "accepted", "rejected"], default: "applied" }
     }],
     // Status
     status: { type: String, enum: ["active", "closed"], default: "active" },

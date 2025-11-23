@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { AppContext } from "../context/AppContext";
 import { toast } from "react-toastify";
 import { FiEdit2, FiSave, FiCamera } from "react-icons/fi";
+import { useTranslation } from 'react-i18next';
 import defaultProfile from "../assets/default_profile.png";
 
 const indianStates = [
@@ -19,6 +20,8 @@ const UserProfile = () => {
   const { userProfile, setUserProfile, api, userToken, loadUserProfile } =
     useContext(AppContext);
 
+  const { t } = useTranslation();
+
   const [isEditing, setIsEditing] = useState(false);
   const [imageFile, setImageFile] = useState(null);
   const [skillsInput, setSkillsInput] = useState("");
@@ -26,7 +29,7 @@ const UserProfile = () => {
   if (!userProfile) {
     return (
       <div className="flex justify-center items-center w-full h-[70vh]">
-        <p className="text-lg text-gray-600 animate-pulse">Loading profile...</p>
+        <p className="text-lg text-gray-600 animate-pulse">{t('profile.loading')}</p>
       </div>
     );
   }
@@ -82,14 +85,14 @@ const uploadImageToCloudinary = async (file) => {
     );
 
     if (data.success) {
-      toast.success("Profile Updated!");
+      toast.success(t('profile.updated'));
       loadUserProfile();
       setIsEditing(false);
     } else {
       toast.error(data.message);
     }
   } catch (err) {
-    toast.error("Update failed");
+    toast.error(t('profile.updateFailed'));
     console.log(err);
   }
 };
@@ -117,21 +120,21 @@ const uploadImageToCloudinary = async (file) => {
       <div className="bg-white p-8 rounded-2xl shadow-lg max-w-3xl w-full">
 
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-semibold">My Profile</h2>
+          <h2 className="text-2xl font-semibold">{t('profile.title')}</h2>
 
           {!isEditing ? (
             <button
               onClick={() => setIsEditing(true)}
               className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg"
             >
-              <FiEdit2 /> Edit
+              <FiEdit2 /> {t('profile.edit')}
             </button>
           ) : (
             <button
               onClick={saveProfile}
               className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg"
             >
-              <FiSave /> Save
+              <FiSave /> {t('profile.save')}
             </button>
           )}
         </div>
@@ -161,7 +164,7 @@ const uploadImageToCloudinary = async (file) => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
 
           <div>
-            <label className="font-medium">Full Name</label>
+            <label className="font-medium">{t('profile.fullName')}</label>
             <input
               disabled={!isEditing}
               value={userProfile.name}
@@ -173,7 +176,7 @@ const uploadImageToCloudinary = async (file) => {
           </div>
 
           <div>
-            <label className="font-medium">Phone</label>
+            <label className="font-medium">{t('profile.phone')}</label>
             <input
               disabled={!isEditing}
               value={userProfile.phone || ""}
@@ -185,7 +188,7 @@ const uploadImageToCloudinary = async (file) => {
           </div>
 
           <div>
-            <label className="font-medium">Email</label>
+            <label className="font-medium">{t('profile.email')}</label>
             <input
               disabled
               value={userProfile.email}
@@ -194,7 +197,7 @@ const uploadImageToCloudinary = async (file) => {
           </div>
 
           <div>
-            <label className="font-medium">Date of Birth</label>
+            <label className="font-medium">{t('profile.dob')}</label>
             <input
               type="date"
               disabled={!isEditing}
@@ -207,7 +210,7 @@ const uploadImageToCloudinary = async (file) => {
           </div>
 
           <div>
-            <label className="font-medium">Gender</label>
+            <label className="font-medium">{t('profile.gender')}</label>
             <select
               disabled={!isEditing}
               value={userProfile.gender || ""}
@@ -216,15 +219,15 @@ const uploadImageToCloudinary = async (file) => {
               }
               className="w-full border p-2 rounded mt-1"
             >
-              <option>Not Selected</option>
-              <option>Male</option>
-              <option>Female</option>
-              <option>Other</option>
+              <option>{t('profile.notSelected')}</option>
+              <option>{t('profile.male')}</option>
+              <option>{t('profile.female')}</option>
+              <option>{t('profile.other')}</option>
             </select>
           </div>
 
           <div>
-            <label className="font-medium">Origin State</label>
+            <label className="font-medium">{t('profile.originState')}</label>
             <select
               disabled={!isEditing}
               value={userProfile.originState || ""}
@@ -240,7 +243,7 @@ const uploadImageToCloudinary = async (file) => {
           </div>
 
           <div>
-            <label className="font-medium">Origin District</label>
+            <label className="font-medium">{t('profile.originDistrict')}</label>
             <input
               disabled={!isEditing}
               value={userProfile.originDistrict || ""}
@@ -252,7 +255,7 @@ const uploadImageToCloudinary = async (file) => {
           </div>
 
           <div>
-            <label className="font-medium">Current State</label>
+            <label className="font-medium">{t('profile.currentState')}</label>
             <select
               disabled={!isEditing}
               value={userProfile.currentState || ""}
@@ -268,7 +271,7 @@ const uploadImageToCloudinary = async (file) => {
           </div>
 
           <div>
-            <label className="font-medium">Current District</label>
+            <label className="font-medium">{t('profile.currentDistrict')}</label>
             <input
               disabled={!isEditing}
               value={userProfile.currentDistrict || ""}
@@ -280,7 +283,7 @@ const uploadImageToCloudinary = async (file) => {
           </div>
 
           <div>
-            <label className="font-medium">Present City</label>
+            <label className="font-medium">{t('profile.presentCity')}</label>
             <input
               disabled={!isEditing}
               value={userProfile.presentCity || ""}
@@ -292,14 +295,14 @@ const uploadImageToCloudinary = async (file) => {
           </div>
 
           <div className="md:col-span-2">
-            <label className="font-medium">Experience</label>
+            <label className="font-medium">{t('profile.experience')}</label>
             <input
               disabled={!isEditing}
               value={userProfile.experience || ""}
               onChange={(e) =>
                 setUserProfile((p) => ({ ...p, experience: e.target.value }))
               }
-              placeholder="e.g., 5 years electrician / carpentry / plumber or brief summary"
+              placeholder={t('profile.experiencePlaceholder')}
               className="w-full border p-2 rounded mt-1"
             />
           </div>
@@ -307,7 +310,7 @@ const uploadImageToCloudinary = async (file) => {
         </div>
 
         <div className="mt-5">
-          <label className="font-medium">Full Address</label>
+          <label className="font-medium">{t('profile.address')}</label>
           <textarea
             disabled={!isEditing}
             value={userProfile.address || ""}
@@ -319,7 +322,7 @@ const uploadImageToCloudinary = async (file) => {
         </div>
 
         <div className="mt-5">
-          <label className="font-medium">Skills</label>
+          <label className="font-medium">{t('profile.skills')}</label>
 
           {isEditing && (
             <div className="flex gap-2 mt-1">
@@ -327,13 +330,13 @@ const uploadImageToCloudinary = async (file) => {
                 value={skillsInput}
                 onChange={(e) => setSkillsInput(e.target.value)}
                 className="border p-2 rounded flex-1"
-                placeholder="Add a skill"
+                placeholder={t('profile.addSkill')}
               />
               <button
                 onClick={addSkill}
                 className="px-4 bg-primary text-white rounded"
               >
-                Add
+                {t('profile.add')}
               </button>
             </div>
           )}

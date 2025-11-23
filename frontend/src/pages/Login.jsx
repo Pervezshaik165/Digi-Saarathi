@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../context/AppContext";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Login = () => {
   const [mode, setMode] = useState("User Login");
@@ -20,6 +21,15 @@ const Login = () => {
   } = useContext(AppContext);
 
   const navigate = useNavigate();
+  const { t } = useTranslation();
+
+  const modeKey = (m) => {
+    if (m === "User Login") return "login.user_login.label";
+    if (m === "User Sign Up") return "login.user_signup.label";
+    if (m === "Employer Login") return "login.employer_login.label";
+    if (m === "Employer Sign Up") return "login.employer_signup.label";
+    return "login.user_login.label";
+  };
 
 const onSubmitHandler = async (event) => {
   event.preventDefault();
@@ -64,7 +74,7 @@ const onSubmitHandler = async (event) => {
     }
 
     // SUCCESS
-    toast.success(`${mode} successful!`);
+    toast.success(t("login.success", { mode: t(modeKey(mode)) }));
 
     if (mode.includes("User")) {
       setUserToken(data.token);
@@ -102,12 +112,12 @@ const onSubmitHandler = async (event) => {
     >
       <div className="p-8 max-w-sm w-full bg-white border rounded-xl shadow">
 
-        <p className="text-2xl font-semibold text-center">{mode}</p>
+        <p className="text-2xl font-semibold text-center">{t(modeKey(mode))}</p>
 
         {/* USER SIGNUP */}
         {mode === "User Sign Up" && (
           <div className="w-full mt-2">
-            <p className="text-sm">Full Name</p>
+            <p className="text-sm">{t("login.fullName")}</p>
             <input
               className="w-full p-2 border rounded mt-1"
               value={name}
@@ -120,7 +130,7 @@ const onSubmitHandler = async (event) => {
         {/* EMPLOYER SIGNUP */}
         {mode === "Employer Sign Up" && (
           <div className="w-full mt-2">
-            <p className="text-sm">Company Name</p>
+            <p className="text-sm">{t("login.companyName")}</p>
             <input
               className="w-full p-2 border rounded mt-1"
               value={company}
@@ -132,7 +142,7 @@ const onSubmitHandler = async (event) => {
 
         {/* EMAIL */}
         <div className="w-full mt-2">
-          <p className="text-sm">Email</p>
+          <p className="text-sm">{t("login.email")}</p>
           <input
             className="w-full p-2 border rounded mt-1"
             type="email"
@@ -144,7 +154,7 @@ const onSubmitHandler = async (event) => {
 
         {/* PASSWORD */}
         <div className="w-full mt-2">
-          <p className="text-sm">Password</p>
+          <p className="text-sm">{t("login.password")}</p>
           <input
             className="w-full p-2 border rounded mt-1"
             type="password"
@@ -155,7 +165,7 @@ const onSubmitHandler = async (event) => {
         </div>
 
         <button className="w-full mt-4 bg-primary text-white py-2 rounded hover:bg-blue-700 transition">
-          {mode.includes("Sign Up") ? "Create Account" : "Login"}
+          {mode.includes("Sign Up") ? t("login.createAccount") : t("login.loginButton")}
         </button>
 
         {/* SWITCH */}
@@ -163,17 +173,17 @@ const onSubmitHandler = async (event) => {
           {mode === "User Login" && (
             <>
               <p>
-                New user?{" "}
+                {t("login.newUser")} {" "}
                 <span className="text-primary underline cursor-pointer"
                   onClick={() => setMode("User Sign Up")}>
-                  Sign Up
+                  {t("login.signUp")}
                 </span>
               </p>
               <p>
-                Employer?{" "}
+                {t("login.employerQuestion")} {" "}
                 <span className="text-primary underline cursor-pointer"
                   onClick={() => setMode("Employer Login")}>
-                  Login here
+                  {t("login.loginHere")}
                 </span>
               </p>
             </>
@@ -182,17 +192,17 @@ const onSubmitHandler = async (event) => {
           {mode === "Employer Login" && (
             <>
               <p>
-                Need employer account?{" "}
+                {t("login.needEmployer")} {" "}
                 <span className="text-primary underline cursor-pointer"
                   onClick={() => setMode("Employer Sign Up")}>
-                  Sign Up
+                  {t("login.signUp")}
                 </span>
               </p>
               <p>
-                User?{" "}
+                {t("login.user_login.label")} {" "}
                 <span className="text-primary underline cursor-pointer"
                   onClick={() => setMode("User Login")}>
-                  Login here
+                  {t("login.loginHere")}
                 </span>
               </p>
             </>
@@ -200,20 +210,20 @@ const onSubmitHandler = async (event) => {
 
           {mode === "User Sign Up" && (
             <p>
-              Already have an account?{" "}
+              {t("login.alreadyHaveAccount")} {" "}
               <span className="text-primary underline cursor-pointer"
                 onClick={() => setMode("User Login")}>
-                Login
+                {t("login.loginButton")}
               </span>
             </p>
           )}
 
           {mode === "Employer Sign Up" && (
             <p>
-              Already registered?{" "}
+              {t("login.alreadyHaveAccount")} {" "}
               <span className="text-primary underline cursor-pointer"
                 onClick={() => setMode("Employer Login")}>
-                Login
+                {t("login.loginButton")}
               </span>
             </p>
           )}

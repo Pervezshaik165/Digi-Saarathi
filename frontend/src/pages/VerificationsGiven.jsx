@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 import EmployerHeader from "../components/employer/EmployerHeader";
 import { toast } from "react-toastify";
+import { useTranslation } from 'react-i18next';
 
 const VerificationsGiven = () => {
   const { api, employerToken } = useContext(AppContext);
@@ -10,6 +11,7 @@ const VerificationsGiven = () => {
   const [verifications, setVerifications] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedVerification, setSelectedVerification] = useState(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (!employerToken) {
@@ -28,7 +30,7 @@ const VerificationsGiven = () => {
         setVerifications(response.data.verifications || []);
       }
     } catch (error) {
-      toast.error(error.response?.data?.message || "Failed to load verifications");
+      toast.error(error.response?.data?.message || t('createVerification.failedCreate', 'Failed to load verifications'));
     } finally {
       setLoading(false);
     }
@@ -37,13 +39,13 @@ const VerificationsGiven = () => {
   const copyVerificationLink = (qrToken) => {
     const link = `${window.location.origin}/verify/${qrToken}`;
     navigator.clipboard.writeText(link);
-    toast.success("Verification link copied!");
+    toast.success(t('verificationsGiven.linkCopied'));
   };
 
-  if (loading) {
+    if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="text-xl">Loading...</div>
+        <div className="text-xl">{t('common.loading', 'Loading...')}</div>
       </div>
     );
   }
@@ -51,14 +53,14 @@ const VerificationsGiven = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <EmployerHeader
-        title="Verifications Given"
+        title={t('verificationsGiven.title')}
         right={(
           <div className="flex gap-4">
             <button
               onClick={() => navigate("/employer/create-verification")}
               className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
             >
-              + Create New
+              + {t('verificationsGiven.createNew')}
             </button>
           </div>
         )}
@@ -80,12 +82,12 @@ const VerificationsGiven = () => {
                 d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
               />
             </svg>
-            <p className="text-gray-500 text-lg mb-4">No verifications yet</p>
+            <p className="text-gray-500 text-lg mb-4">{t('verificationsGiven.noVerifications')}</p>
             <button
               onClick={() => navigate("/employer/create-verification")}
               className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
             >
-              Create Your First Verification
+              {t('verificationsGiven.createFirst')}
             </button>
           </div>
         ) : (
@@ -95,22 +97,22 @@ const VerificationsGiven = () => {
                 <thead className="bg-gray-50">
                   <tr>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Worker
+                              {t('verificationsGiven.worker')}
+                            </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      {t('verificationsGiven.jobRole')}
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Job Role
+                      {t('verificationsGiven.dates')}
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Dates
+                      {t('verificationsGiven.rating')}
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Rating
+                      {t('verificationsGiven.created')}
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Created
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Actions
+                      {t('verificationsGiven.actions')}
                     </th>
                   </tr>
                 </thead>
@@ -162,13 +164,13 @@ const VerificationsGiven = () => {
                           onClick={() => setSelectedVerification(verification)}
                           className="text-blue-600 hover:text-blue-900 mr-4"
                         >
-                          View
+                          {t('view')}
                         </button>
                         <button
                           onClick={() => copyVerificationLink(verification.qrToken)}
                           className="text-green-600 hover:text-green-900"
                         >
-                          Copy Link
+                          {t('createVerification.copy')}
                         </button>
                       </td>
                     </tr>
@@ -186,7 +188,7 @@ const VerificationsGiven = () => {
           <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
             <div className="p-6 border-b flex justify-between items-center">
               <h2 className="text-xl font-semibold text-gray-900">
-                Verification Details
+                {t('verificationsGiven.verificationDetails')}
               </h2>
               <button
                 onClick={() => setSelectedVerification(null)}
@@ -204,35 +206,35 @@ const VerificationsGiven = () => {
             </div>
             <div className="p-6 space-y-4">
               <div>
-                <p className="text-sm font-medium text-gray-500">Worker Name</p>
+                <p className="text-sm font-medium text-gray-500">{t('verificationsGiven.workerName')}</p>
                 <p className="text-lg text-gray-900">
                   {selectedVerification.worker?.name || selectedVerification.employeeName}
                 </p>
               </div>
               <div>
-                <p className="text-sm font-medium text-gray-500">Phone Number</p>
+                <p className="text-sm font-medium text-gray-500">{t('verificationsGiven.phoneNumber')}</p>
                 <p className="text-lg text-gray-900">
                   {selectedVerification.phoneNumber || selectedVerification.worker?.phone || "N/A"}
                 </p>
               </div>
               <div>
-                <p className="text-sm font-medium text-gray-500">Job Role</p>
+                <p className="text-sm font-medium text-gray-500">{t('verificationsGiven.jobRole')}</p>
                 <p className="text-lg text-gray-900">{selectedVerification.jobRole}</p>
               </div>
               <div>
-                <p className="text-sm font-medium text-gray-500">Type of Work</p>
+                <p className="text-sm font-medium text-gray-500">{t('verificationsGiven.typeOfWork')}</p>
                 <p className="text-lg text-gray-900">{selectedVerification.typeOfWork || "N/A"}</p>
               </div>
               <div>
-                <p className="text-sm font-medium text-gray-500">Company</p>
+                <p className="text-sm font-medium text-gray-500">{t('verificationsGiven.company')}</p>
                 <p className="text-lg text-gray-900">{selectedVerification.companyName}</p>
               </div>
               <div>
-                <p className="text-sm font-medium text-gray-500">Experience</p>
+                <p className="text-sm font-medium text-gray-500">{t('verificationsGiven.experience')}</p>
                 <p className="text-lg text-gray-900">{selectedVerification.experience || "N/A"}</p>
               </div>
               <div>
-                <p className="text-sm font-medium text-gray-500">Employment Period</p>
+                <p className="text-sm font-medium text-gray-500">{t('verificationsGiven.employmentPeriod')}</p>
                 <p className="text-lg text-gray-900">
                   {new Date(selectedVerification.startDate).toLocaleDateString()} -{" "}
                   {new Date(selectedVerification.endDate).toLocaleDateString()}
@@ -240,7 +242,7 @@ const VerificationsGiven = () => {
               </div>
               {selectedVerification.skills && selectedVerification.skills.length > 0 && (
                 <div>
-                  <p className="text-sm font-medium text-gray-500">Skills</p>
+                  <p className="text-sm font-medium text-gray-500">{t('verificationsGiven.skills')}</p>
                   <div className="flex flex-wrap gap-2 mt-2">
                     {selectedVerification.skills.map((skill, idx) => (
                       <span
@@ -254,7 +256,7 @@ const VerificationsGiven = () => {
                 </div>
               )}
               <div>
-                <p className="text-sm font-medium text-gray-500">Rating</p>
+                <p className="text-sm font-medium text-gray-500">{t('verificationsGiven.rating')}</p>
                 <div className="flex items-center mt-2">
                   {[...Array(5)].map((_, i) => (
                     <svg
@@ -273,25 +275,25 @@ const VerificationsGiven = () => {
                 </div>
               </div>
               <div>
-                <p className="text-sm font-medium text-gray-500">Recommended</p>
+                <p className="text-sm font-medium text-gray-500">{t('verificationsGiven.recommended')}</p>
                 <p className="text-lg text-gray-900">
                   {selectedVerification.recommended || selectedVerification.recommendation || "N/A"}
                 </p>
               </div>
               {selectedVerification.feedback && (
                 <div>
-                  <p className="text-sm font-medium text-gray-500">Feedback</p>
+                  <p className="text-sm font-medium text-gray-500">{t('verificationsGiven.feedback')}</p>
                   <p className="text-lg text-gray-900 whitespace-pre-wrap">{selectedVerification.feedback}</p>
                 </div>
               )}
               {!selectedVerification.feedback && selectedVerification.comments && (
                 <div>
-                  <p className="text-sm font-medium text-gray-500">Comments</p>
+                  <p className="text-sm font-medium text-gray-500">{t('verificationsGiven.comments')}</p>
                   <p className="text-lg text-gray-900 whitespace-pre-wrap">{selectedVerification.comments}</p>
                 </div>
               )}
               <div>
-                <p className="text-sm font-medium text-gray-500">Verification Link</p>
+                <p className="text-sm font-medium text-gray-500">{t('verificationsGiven.verificationLink')}</p>
                 <div className="flex gap-2 mt-2">
                   <input
                     type="text"
@@ -303,7 +305,7 @@ const VerificationsGiven = () => {
                     onClick={() => copyVerificationLink(selectedVerification.qrToken)}
                     className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
                   >
-                    Copy
+                    {t('verificationsGiven.copy', 'Copy')}
                   </button>
                 </div>
               </div>

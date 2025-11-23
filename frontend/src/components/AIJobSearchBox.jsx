@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { AppContext } from '../context/AppContext';
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 
 const RecommendationCard = ({ rec }) => {
   const { job, scorePercent } = rec;
@@ -23,6 +24,7 @@ const RecommendationCard = ({ rec }) => {
 
 const AIJobSearchBox = () => {
   const { api, userToken } = useContext(AppContext);
+  const { t } = useTranslation();
   const [running, setRunning] = useState(false);
   const [recs, setRecs] = useState([]);
   const [salaryMin, setSalaryMin] = useState('');
@@ -30,7 +32,7 @@ const AIJobSearchBox = () => {
 
   const runSearch = async () => {
     if (!userToken) {
-      toast.info('Please login to run AI job search');
+      toast.info(t('ai.noLogin', 'Please login to run AI job search'));
       return;
     }
     try {
@@ -44,15 +46,15 @@ const AIJobSearchBox = () => {
       else if (max) body.salaryPreference = max;
 
       const res = await api.post('/api/user/recommendations', body, { headers: { Authorization: `Bearer ${userToken}` } });
-      if (res.data.success) {
+        if (res.data.success) {
         setRecs(res.data.recommended || []);
-        if (!(res.data.recommended || []).length) toast.info('No strong recommendations found');
+        if (!(res.data.recommended || []).length) toast.info(t('ai.noRecommendations', 'No strong recommendations found'));
       } else {
-        toast.error('Failed to get recommendations');
+        toast.error(t('ai.failed', 'Failed to get recommendations'));
       }
     } catch (err) {
       console.error(err);
-      toast.error(err.response?.data?.message || 'Recommendation failed');
+      toast.error(err.response?.data?.message || t('ai.failed', 'Recommendation failed'));
     } finally {
       setRunning(false);
     }
@@ -62,17 +64,17 @@ const AIJobSearchBox = () => {
     <div className="mb-6">
       <div className="bg-white p-4 rounded shadow flex items-center justify-between w-full">
         <div>
-          <h3 className="text-lg font-semibold">Smart Job Matching Using AI</h3>
-          <p className="text-sm text-gray-600">Top 3 jobs matched to your profile (skills, experience, location, salary range).</p>
+          <h3 className="text-lg font-semibold">{t('ai.title', 'Smart Job Matching Using AI')}</h3>
+          <p className="text-sm text-gray-600">{t('ai.desc', 'Top 3 jobs matched to your profile (skills, experience, location, salary range).')}</p>
         </div>
         <div>
-          <button
+            <button
             onClick={runSearch}
             disabled={running}
-            aria-label="Find top job matches for your profile"
+            aria-label={t('ai.aria', 'Find top job matches for your profile')}
             className="px-4 py-2 bg-indigo-600 text-white rounded"
           >
-            {running ? 'Finding best matches...' : 'Find my top matches'}
+            {running ? t('ai.running', 'Finding best matches...') : t('ai.find', 'Find my top matches')}
           </button>
         </div>
           <div className="ml-4 flex items-center gap-2">

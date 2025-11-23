@@ -3,10 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 import EmployerHeader from "../components/employer/EmployerHeader";
 import { toast } from "react-toastify";
+import { useTranslation } from 'react-i18next';
 
 const MyJobs = () => {
   const { api, employerToken } = useContext(AppContext);
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedJob, setSelectedJob] = useState(null);
@@ -48,10 +50,28 @@ const MyJobs = () => {
     }
   };
 
+  const updateApplicantStatus = async (jobId, applicant, newStatus) => {
+    try {
+      const id = applicant._id || applicant.worker?._id || applicant.worker;
+      const response = await api.put(`/api/employer/job/${jobId}/applicant/${id}/status`, { status: newStatus }, { headers: { token: employerToken } });
+      if (response.data.success) {
+        toast.success('Applicant status updated');
+        // refresh applicants for selected job
+        await fetchJobApplicants(jobId);
+      }
+    } catch (err) {
+      toast.error(err.response?.data?.message || 'Failed to update applicant status');
+    }
+  };
+
+  const viewUserDocuments = (userId) => {
+    navigate(`/employer/user/${userId}/documents`);
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="text-xl">Loading...</div>
+        <div className="text-xl">{t('myJobs.loading')}</div>
       </div>
     );
   }
@@ -59,7 +79,7 @@ const MyJobs = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <EmployerHeader
-        title="My Jobs"
+        title={t('myJobs.title')}
         right={(
           <div className="flex gap-4">
             <button
@@ -72,15 +92,15 @@ const MyJobs = () => {
                   if (hasUploaded && allVerified) {
                     navigate('/employer/post-job');
                   } else {
-                    toast.warn('You must upload at least one document and ensure none are pending or rejected. Please upload documents and wait for admin verification.');
+                    toast.warn(t('myJobs.errors.missingDocs'));
                   }
                 } catch (err) {
-                  toast.error('Failed to check documents. Please try again.');
+                  toast.error(t('myJobs.errors.checkFailed'));
                 }
               }}
               className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
             >
-              + Post New Job
+              + {t('myJobs.postNew')}
             </button>
           </div>
         )}
@@ -102,12 +122,12 @@ const MyJobs = () => {
                 d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
               />
             </svg>
-            <p className="text-gray-500 text-lg mb-4">No jobs posted yet</p>
+            <p className="text-gray-500 text-lg mb-4">{t('myJobs.noJobs')}</p>
             <button
               onClick={() => navigate("/employer/post-job")}
               className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
             >
-              Post Your First Job
+              {t('myJobs.postFirst')}
             </button>
           </div>
         ) : (
@@ -117,7 +137,7 @@ const MyJobs = () => {
                 <div className="flex justify-between items-start">
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
-                      <h3 className="text-xl font-semibold text-gray-900">{job.title}</h3>
+                        <h3 className="text-xl font-semibold text-gray-900">{job.title}</h3>
                       <span
                         className={`px-2 py-1 text-xs rounded ${
                           job.status === "active"
@@ -160,7 +180,7 @@ const MyJobs = () => {
                       <p className="text-gray-700 mt-2 line-clamp-2">{job.description}</p>
                     )}
                     <p className="text-sm text-gray-500 mt-2">
-                      Posted on {new Date(job.createdAt).toLocaleDateString()}
+                      {t('myJobs.postedOn', { date: new Date(job.createdAt).toLocaleDateString() })}
                     </p>
                   </div>
                   <div className="ml-4 flex flex-col gap-2">
@@ -168,13 +188,13 @@ const MyJobs = () => {
                       onClick={() => fetchJobApplicants(job._id)}
                       className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm"
                     >
-                      View Applicants ({job.applicants?.length || 0})
+                      {t('myJobs.viewApplicants')} ({job.applicants?.length || 0})
                     </button>
                     <button
                       onClick={() => navigate('/employer/post-job', { state: { job } })}
                       className="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 text-sm"
                     >
-                      Edit Job
+                      {t('myJobs.editJob')}
                     </button>
                   </div>
                 </div>
@@ -190,7 +210,7 @@ const MyJobs = () => {
           <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
             <div className="p-6 border-b flex justify-between items-center">
               <h2 className="text-xl font-semibold text-gray-900">
-                Applicants for {selectedJob.title}
+                {t('myJobs.applicantsFor', { title: selectedJob.title })}
               </h2>
               <button
                 onClick={() => setSelectedJob(null)}
@@ -217,7 +237,7 @@ const MyJobs = () => {
                       <div className="flex justify-between items-start">
                         <div>
                           <h3 className="font-semibold text-gray-900">
-                            {applicant.worker?.name || "Unknown"}
+                            {applicant.worker?.name || t('myJobs.unknown')}
                           </h3>
                           <p className="text-sm text-gray-600">{applicant.worker?.email}</p>
                           {applicant.worker?.phone && (
@@ -241,8 +261,27 @@ const MyJobs = () => {
                         </div>
                         <div className="text-right">
                           <p className="text-xs text-gray-500">
-                            Applied: {new Date(applicant.appliedAt).toLocaleDateString()}
+                            {t('myJobs.appliedOn', { date: new Date(applicant.appliedAt).toLocaleDateString() })}
                           </p>
+                        </div>
+                      </div>
+                      <div className="mt-3 flex items-center justify-between">
+                        <div>
+                          <button onClick={() => viewUserDocuments(applicant.worker?._id || applicant.worker)} className="text-indigo-600 text-sm">{t('myJobs.viewDocuments')}</button>
+                        </div>
+                        <div className="flex gap-2">
+                          {((applicant.status || 'applied') === 'applied') && (
+                            <>
+                              <button onClick={() => updateApplicantStatus(selectedJob._id, applicant, 'accepted')} className="px-3 py-1 bg-green-600 text-white rounded text-sm">{t('myJobs.accept')}</button>
+                              <button onClick={() => updateApplicantStatus(selectedJob._id, applicant, 'rejected')} className="px-3 py-1 bg-red-600 text-white rounded text-sm">{t('myJobs.reject')}</button>
+                            </>
+                          )}
+                          {((applicant.status || 'applied') === 'accepted') && (
+                            <span className="text-green-600 font-semibold">{t('myJobs.accepted')}</span>
+                          )}
+                          {((applicant.status || 'applied') === 'rejected') && (
+                            <span className="text-red-600 font-semibold">{t('myJobs.rejected')}</span>
+                          )}
                         </div>
                       </div>
                     </div>
