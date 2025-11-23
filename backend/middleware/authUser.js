@@ -1,26 +1,27 @@
 import jwt from "jsonwebtoken";
 
-const authUser = async (req, res, next) => {
+const authUser = (req, res, next) => {
   try {
+    // Try common header locations
     let token =
-      req.headers.token ||
       req.headers.authorization?.split(" ")[1] ||
+      req.headers.token ||
       req.headers.Authorization?.split(" ")[1];
 
     if (!token) {
-      return res.status(401).json({ success: false, message: "Not Authorized - No token" });
+      return res.status(401).json({ success: false, message: "Unauthorized: No token" });
     }
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-    if (!decoded.id) {
-      return res.status(401).json({ success: false, message: "Invalid token" });
+    if (!decoded?.id) {
+      return res.status(401).json({ success: false, message: "Unauthorized: Invalid token" });
     }
 
-    req.body.userId = decoded.id;
+    // Attach userId to request (use req.userId as other code expects)
+    req.userId = decoded.id;
     next();
   } catch (error) {
-    return res.json({ success: false, message: error.message });
+    return res.status(401).json({ success: false, message: "Unauthorized" });
   }
 };
 

@@ -47,31 +47,27 @@ const Dashboard = () => {
       <div className="grid grid-cols-3 gap-6">
         <div className="col-span-2 bg-slate-50 rounded-xl p-6 shadow-sm">
           <h3 className="font-semibold mb-3">Recent Activities</h3>
-          <ul>
+          <ul className="max-h-96 overflow-y-auto">
             {recent.map((r) => (
-              <li key={r.id} className="text-sm text-slate-700 py-2 border-b last:border-b-0">{r.text} <span className="text-xs text-slate-500 float-right">{r.date}</span></li>
+              <li key={r.id} className="text-sm text-slate-700 py-2 border-b last:border-b-0">{r.text} <span className="text-xs text-slate-500 float-right">{String(r.date)}</span></li>
             ))}
           </ul>
         </div>
 
         <div className="bg-slate-50 rounded-xl p-6 shadow-sm">
           <h3 className="font-semibold mb-3">Verification Summary</h3>
-          <div className="text-sm text-slate-700">
-            <div className="mb-4">
-              <div className="font-medium">Rajesh Kumar — Plumber</div>
-              <div className="text-xs text-slate-500">Kiran Traders Pvt Ltd</div>
-              <div className="text-xs text-slate-400 mt-2">11/18/2025, 8:33:22 PM</div>
-            </div>
-
-            <div>
-              <div className="font-medium">Fatima Bano — Mason</div>
-              <div className="text-xs text-slate-500">Sunrise Constructions</div>
-              <div className="text-xs text-slate-400 mt-2">11/17/2025, 10:33:22 PM</div>
-            </div>
-          </div>
-
-          <div className="mt-4">
-            <button className="px-3 py-1 bg-white border rounded">View all logs</button>
+          <div className="text-sm text-slate-700 max-h-96 overflow-y-auto">
+            {(summary.verificationSummary || []).length === 0 ? (
+              <div className="text-xs text-slate-500">No recent verifications</div>
+            ) : (
+              (summary.verificationSummary || []).map((v) => (
+                <div key={v.id} className="mb-4">
+                  <div className="font-medium">{v.worker} — {v.role}</div>
+                  <div className="text-xs text-slate-500">{v.employer}</div>
+                  <div className="text-xs text-slate-400 mt-2">{new Date(v.date).toLocaleString()}</div>
+                </div>
+              ))
+            )}
           </div>
         </div>
       </div>

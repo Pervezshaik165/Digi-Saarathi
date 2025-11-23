@@ -18,14 +18,30 @@ export const AdminProvider = ({ children }) => {
       headers: { "Content-Type": "application/json" },
     });
 
+    // Always attach latest token from localStorage before each request (fixes refresh issues)
+    instance.interceptors.request.use((config) => {
+      try {
+        const token = localStorage.getItem("adminToken");
+        if (token) config.headers = { ...config.headers, Authorization: `Bearer ${token}` };
+      } catch (e) {
+        // ignore
+      }
+      return config;
+    });
+
     // Show backend messages (success/error) as toast notifications
     instance.interceptors.response.use(
       (response) => {
         const msg = response?.data?.message;
         const ok = response?.data?.success;
+        // Only show success toasts for non-GET requests to avoid noisy messages
+        const method = response?.config?.method?.toLowerCase();
         if (msg) {
-          if (ok) toast.success(msg);
-          else toast.error(msg);
+          if (ok) {
+            if (method && method !== "get") toast.success(msg);
+          } else {
+            toast.error(msg);
+          }
         }
         return response;
       },

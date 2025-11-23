@@ -8,8 +8,11 @@ const employerSchema = new mongoose.Schema(
 
     // SAMPLE FIELDS – editable later
     phone: { type: String },
+    address: { type: String },
     industry: { type: String },
     location: { type: String },
+    // activation flag: employers start deactivated by default
+    isActive: { type: Boolean, default: false },
   },
   { timestamps: true }
 );

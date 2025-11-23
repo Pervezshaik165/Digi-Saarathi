@@ -17,10 +17,13 @@ const authEmployer = async (req, res, next) => {
       return res.status(401).json({ success: false, message: "Invalid token" });
     }
 
+    // set both places so GET requests (no body) and other handlers can read it
+    req.body = req.body || {};
     req.body.employerId = decoded.id;
+    req.employerId = decoded.id;
     next();
   } catch (error) {
-    return res.json({ success: false, message: error.message });
+    return res.status(401).json({ success: false, message: error.message });
   }
 };
 

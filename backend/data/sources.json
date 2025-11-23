@@ -1,0 +1,50 @@
+[
+  {
+    "id": "curated-seed",
+    "name": "Curated seed list",
+    "type": "local-file",
+    "path": "./data/curated_schemes.json",
+    "mapper": "common",
+    "description": "Local curated schemes file for immediate coverage"
+  },
+  {
+    "id": "nrega-api",
+    "name": "MGNREGA API (state-wise)",
+    "type": "url",
+    "url": "https://nrega.nic.in/netnrega/",
+    "mapper": "common",
+    "description": "National Rural Employment Guarantee portal (may expose machine endpoints per state)"
+  },
+  {
+    "id": "pmkisan-portal",
+    "name": "PM-KISAN portal",
+    "type": "url",
+    "url": "https://pmkisan.gov.in",
+    "mapper": "common",
+    "description": "PM-KISAN portal (has downloads/beneficiary lists in some states)"
+  },
+  {
+    "id": "pmjay-portal",
+    "name": "PM-JAY portal",
+    "type": "url",
+    "url": "https://pmjay.gov.in",
+    "mapper": "common",
+    "description": "Ayushman Bharat PM-JAY portal"
+  },
+  {
+    "id": "data-gov-home",
+    "name": "Data.Gov.In home (scrape)",
+    "type": "scrape",
+    "url": "https://data.gov.in/",
+    "mapper": "common",
+    "description": "Attempt to discover dataset links on data.gov.in (best-effort)"
+  },
+  {
+    "id": "national-portal-scrape",
+    "name": "National portal schemes scraping",
+    "type": "scrape",
+    "url": "https://www.india.gov.in/what-you-need-government-schemes",
+    "mapper": "common",
+    "description": "Scrape the national portal for scheme links and basic info; records will be flagged for manual review"
+  }
+]
