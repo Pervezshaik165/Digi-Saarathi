@@ -16,7 +16,7 @@ const PRECACHE_URLS = [
 
 // Fallback image to use when an image request fails (development helper)
 // I placed your uploaded logo in the workspace; in production use '/icons/icon-512.png'.
-const FALLBACK_IMAGE = 'sandbox:/mnt/data/92df67d9-9c34-4826-9a0f-54ebb0770437.png'; 
+const FALLBACK_IMAGE = '/icons/icon-512.png'; 
 // Replace above with '/icons/icon-512.png' if the file is in public/icons/
 
 self.addEventListener('install', (event) => {
@@ -70,20 +70,24 @@ self.addEventListener('fetch', (event) => {
   if (request.method !== 'GET') return;
 
   // SPA navigation requests: network-first, fallback to cached index.html
-  if (request.mode === 'navigate') {
-    event.respondWith(
-      fetch(request)
-        .then((res) => {
-          // update runtime cache for navigation responses too
-          caches.open(RUNTIME).then((cache) => cache.put(request, res.clone()));
-          return res;
-        })
-        .catch(() =>
-          caches.match('/index.html').then((cached) => cached || new Response('Offline', { status: 503 }))
-        )
-    );
-    return;
-  }
+  // inside service-worker.js (replace current navigation handler)
+if (request.mode === 'navigate') {
+  event.respondWith(
+    fetch(request)
+      .then(res => {
+        // if server returns non-OK (like 404), return cached index.html instead
+        if (!res || !res.ok) {
+          return caches.match('/index.html');
+        }
+        // cache it optionally and return
+        caches.open(RUNTIME).then(cache => cache.put(request, res.clone()));
+        return res;
+      })
+      .catch(() => caches.match('/index.html'))
+  );
+  return;
+}
+
 
   const url = new URL(request.url);
 
