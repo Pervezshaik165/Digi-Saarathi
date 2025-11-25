@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useContext } from "react";
 import axios from "axios";
+import { AppContext } from "../context/AppContext";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 
@@ -10,13 +12,16 @@ const PublicVerification = () => {
   const [loading, setLoading] = useState(true);
   const { t } = useTranslation();
 
+  const { api } = useContext(AppContext);
+
   useEffect(() => {
     fetchVerification();
   }, [qrToken]);
 
   const fetchVerification = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/verify/${qrToken}`);
+      // use the app axios instance which uses VITE_BACKEND_URL when provided
+      const response = await (api || axios).get(`/verify/${qrToken}`);
       if (response.data.success) {
         setVerification(response.data.verification);
       }
