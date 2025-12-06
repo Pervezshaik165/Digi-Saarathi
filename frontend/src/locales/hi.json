@@ -209,7 +209,7 @@
       "description": "नौकरी का विवरण"
     },
     "placeholders": {
-      "title": "उदा., सॉफ्टवेयर डेवलपर, सेल्स मैनेजर",
+      "title": "उदा., इलेक्ट्रीशियन, राजमिस्त्री",
       "location": "उदा., नई दिल्ली, मुंबई या रिमोट",
       "experience": "उदा., 0-2 वर्ष, 2-5 वर्ष, 5+ वर्ष",
       "description": "नौकरी की जिम्मेदारियों, आवश्यकताओं और लाभों का वर्णन करें..."
@@ -409,6 +409,27 @@
       "Time Management": "समय प्रबंधन",
       "Technical Skills": "तकनीकी कौशल",
       "Customer Service": "ग्राहक सेवा",
+      "Cash Handling": "नकद संभालना",
+      "Market Trading": "बाज़ार व्यापार",
+      "Food Vending": "खाद्य विक्रेता",
+      "Tailoring": "दर्जी का काम",
+      "Carpentry": "बढ़ईगीरी",
+      "Woodworking": "लकड़ी का काम",
+      "Agricultural Work": "कृषि कार्य",
+      "Electrician": "इलेक्ट्रीशियन",
+      "Electrical Wiring": "बिजली की वायरिंग",
+      "Plumbing": "प्लंबिंग",
+      "Masonry": "ईंट का काम",
+      "Bricklaying": "ईंट बिछाना",
+      "Housekeeping": "गृह व्यवस्था",
+      "Cleaning": "सफाई",
+      "Cooking": "खाना बनाना",
+      "Childcare": "बाल देखभाल",
+      "Load Handling": "भार संभालना",
+      "Tool Maintenance": "उपकरण रखरखाव",
+      "Machine Operation": "मशीन संचालन",
+      "Driving": "गाड़ी चलाना",
+      "Scaffolding Safety": "स्कैफ़ोल्डिंग सुरक्षा",
       "Project Management": "परियोजना प्रबंधन",
       "JavaScript": "जावास्क्रिप्ट",
       "Python": "पायथन",
@@ -435,7 +456,7 @@
     "copySuccess": "लिंक क्लिपबोर्ड पर कॉपी किया गया!",
     "failedCreate": "सत्यापन बनाने में विफल",
     "placeholders": {
-      "title": "उदा., सॉफ्टवेयर डेवलपर, सेल्स मैनेजर",
+      "title": "उदा., इलेक्ट्रीशियन, राजमिस्त्री",
       "experience": "उदा., 0-2 वर्ष, 2-5 वर्ष, 5+ वर्ष"
     }
   }

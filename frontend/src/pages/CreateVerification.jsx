@@ -360,7 +360,7 @@ const CreateVerification = () => {
                 onChange={(e) =>
                   setFormData({ ...formData, jobRole: e.target.value })
                 }
-                placeholder={"e.g., Electritian, Mason"}
+                placeholder={t('createVerification.placeholders.title', 'e.g., Electritian, Mason')}
                 className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
                 required
               />

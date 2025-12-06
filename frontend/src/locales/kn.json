@@ -195,7 +195,7 @@
       "description": "ಉದ್ಯೋಗ ವಿವರಣೆ"
     },
     "placeholders": {
-      "title": "ಉದಾ., ಸಾಫ್ಟ್‌ವೇರ್ ಡೆವಲಪರ್, ಸೇಲ್ಸ್ ಮ್ಯಾನೇಜರ್",
+      "title": "ಉದಾಹರಣೆ: ಎಲೆಕ್ಟ್ರಿಶಿಯನ್, ಮೆಸನರಿ",
       "location": "ಉದಾ., ಬೆಂಗಳೂರು, ಮೈಸೂರು ಅಥವಾ ರಿಮೋಟ್",
       "experience": "ಉದಾ., 0-2 ವರ್ಷ, 2-5 ವರ್ಷ, 5+ ವರ್ಷ",
       "description": "ಉದ್ಯೋಗ ಜವಾಬ್ದಾರಿಗಳು, ಅವಶ್ಯಕತೆಗಳು ಮತ್ತು ಪ್ರಯೋಜನಗಳನ್ನು ವಿವರಿಸಿ..."
@@ -250,7 +250,7 @@
       },
       "quickActions": {
         "title": "ತ್ವರಿತ ಕ್ರಮಗಳು",
-        "createVerification": "ಕೆಲಸ ಪರಿಶೀಲನೆ ರಚಿಸಿ",
+        "createVerification": "ಉದ್ಯೋಗ ಪರಿಶೀಲನೆ ರಚಿಸಿ",
         "createVerificationDesc": "ಉದ್ಯೋಗಿ ಅನುಭವವನ್ನು ಪರಿಶೀಲಿಸಿ",
         "postJob": "ಉದ್ಯೋಗ ಪೋಸ್ಟ್ ಮಾಡಿ",
         "postJobDesc": "ಹೊಸ ಉದ್ಯೋಗವನ್ನು ಪೋಸ್ಟ್ ಮಾಡಿ",
@@ -395,7 +395,27 @@
       "Time Management": "ಸಮಯ ನಿರ್ವಹಣೆ",
       "Technical Skills": "ತಾಂತ್ರಿಕ ಕೌಶಲ್ಯಗಳು",
       "Customer Service": "ಗ್ರಾಹಕ ಸೇವೆ",
-      "Project Management": "ಯೋಜನಾ ನಿರ್ವಹಣೆ",
+      "Cash Handling": "ನಗದು ನಿರ್ವಹಣೆ",
+      "Market Trading": "ಬಜಾರ್ ವ್ಯವಹಾರ",
+      "Food Vending": "ಆಹಾರ ಮಾರಾಟ",
+      "Tailoring": "ಅರೆಯಲು ಕೆಲಸ",
+      "Carpentry": "ಮರದ ಕೆಲಸ",
+      "Woodworking": "ಕಾಠದ ಕೆಲಸ",
+      "Agricultural Work": "ಕೃಷಿ ಕೆಲಸ",
+      "Electrician": "ಎಲೆಕ್ಟ್ರಿಶಿಯನ್",
+      "Electrical Wiring": "ವಿದ್ಯುತ್ ತಂತಿ ಸಂಪರ್ಕ",
+      "Plumbing": "ಪ್ಲಂಬಿಂಗ್",
+      "Masonry": "ಮೆಸನರಿ",
+      "Bricklaying": "ಇಟು ಹಾಕುವುದು",
+      "Housekeeping": "ಗೃಹ ನಿರ್ವಹಣೆ",
+      "Cleaning": "ಶುಚೀಕರಣ",
+      "Cooking": "ಅಡಿಗೆ ಪಾಕಶಾಲೆ",
+      "Childcare": "ಮಕ್ಕಳ ಕಾಳಜಿ",
+      "Load Handling": "ಭಾರ ಹ್ಯಾಂಡ್ಲಿಂಗ್",
+      "Tool Maintenance": "ಉಪಕರಣ ನಿರ್ವಹಣೆ",
+      "Machine Operation": "ಯಂತ್ರ ಸಂಚಾಲನೆ",
+      "Driving": "ವಾಹನ ಚಾಲನೆ",
+      "Scaffolding Safety": "ಸ್ಕಾಫೋಲ್ಡಿಂಗ್ ಭದ್ರತೆ",
       "JavaScript": "ಜಾವಾಸ್ಕ್ರಿಪ್ಟ್",
       "Python": "ಪೈಥಾನ್",
       "React": "ರಿಯಾಕ್ಟ್",
@@ -421,7 +441,7 @@
     "copySuccess": "ಲಿಂಕ್ ಕ್ಲಿಪ್‌ಬೋರ್ಡ್‌ಗೆ ನಕಲಿಸಲಾಗಿದೆ!",
     "failedCreate": "ಪರಿಶೀಲನೆ ರಚಿಸಲು ವಿಫಲವಾಗಿದೆ",
     "placeholders": {
-      "title": "ಉದಾ., ಸಾಫ್ಟ್‌ವೇರ್ ಡೆವಲಪರ್, ಸೇಲ್ಸ್ ಮ್ಯಾನೇಜರ್",
+      "title": "ಉದಾಹರಣೆ: ಎಲೆಕ್ಟ್ರಿಶಿಯನ್, ಮೆಸನರಿ",
       "experience": "ಉದಾ., 0-2 ವರ್ಷ, 2-5 ವರ್ಷ, 5+ ವರ್ಷ"
     }
   }

@@ -210,7 +210,7 @@
       "description": "Job Description"
     },
     "placeholders": {
-      "title": "e.g., Software Developer, Sales Manager",
+      "title": "e.g., Electrician, Mason",
       "location": "e.g., New York, NY or Remote",
       "experience": "e.g., 0-2 years, 2-5 years, 5+ years",
       "description": "Describe the job responsibilities, requirements, and benefits..."
@@ -417,6 +417,27 @@
       "Time Management": "Time Management",
       "Technical Skills": "Technical Skills",
       "Customer Service": "Customer Service",
+      "Cash Handling": "Cash Handling",
+      "Market Trading": "Market Trading",
+      "Food Vending": "Food Vending",
+      "Tailoring": "Tailoring",
+      "Carpentry": "Carpentry",
+      "Woodworking": "Woodworking",
+      "Agricultural Work": "Agricultural Work",
+      "Electrician": "Electrician",
+      "Electrical Wiring": "Electrical Wiring",
+      "Plumbing": "Plumbing",
+      "Masonry": "Masonry",
+      "Bricklaying": "Bricklaying",
+      "Housekeeping": "Housekeeping",
+      "Cleaning": "Cleaning",
+      "Cooking": "Cooking",
+      "Childcare": "Childcare",
+      "Load Handling": "Load Handling",
+      "Tool Maintenance": "Tool Maintenance",
+      "Machine Operation": "Machine Operation",
+      "Driving": "Driving",
+      "Scaffolding Safety": "Scaffolding Safety",
       "Project Management": "Project Management",
       "JavaScript": "JavaScript",
       "Python": "Python",
@@ -443,7 +464,7 @@
     "copySuccess": "Link copied to clipboard!",
     "failedCreate": "Failed to create verification",
     "placeholders": {
-      "title": "e.g., Software Developer, Sales Manager",
+      "title": "e.g., Electrician, Mason",
       "experience": "e.g., 0-2 years, 2-5 years, 5+ years"
     }
   }

@@ -195,10 +195,10 @@
       "description": "નોકરીનું વર્ણન"
     },
     "placeholders": {
-      "title": "દા.ત., સોફ્ટવેર ડેવલપર, સેલ્સ મેનેજર",
+      "title": "ઉદાહરણ: ઇલેક્ટ્રિશિયન, મિસ્ત્રી",
       "location": "દા.ત., અમદાવાદ, સુરત અથવા રિમોટ",
       "experience": "દા.ત., 0-2 વર્ષ, 2-5 વર્ષ, 5+ વર્ષ",
-      "description": "નોકરીની જવાબદારીઓ, આવશ્યકતાઓ અને લાભો વર્ણવો..."
+      "description": "નોકરીની જવાબદારીઓ, અવશ્યકતાઓ અને લાભો વર્ણવો..."
     },
     "jobTypes": {
       "fulltime": "પૂર્ણ સમય",
@@ -389,16 +389,37 @@
     "skillsLabel": "પ્રદર્શિત કુશળતા",
     "skills": {
       "Communication": "સંચાર",
-      "Teamwork": "ટીમવર્ક",
+      "Teamwork": "ટીમ વર્ક",
       "Problem Solving": "સમસ્યા ઉકેલ",
       "Leadership": "નેતૃત્વ",
       "Time Management": "સમય વ્યવસ્થાપન",
       "Technical Skills": "તકનીકી કુશળતા",
       "Customer Service": "ગ્રાહક સેવા",
+      "Cash Handling": "નકદ વ્યવહાર",
+      "Market Trading": "બજાર વેપાર",
+      "Food Vending": "અન્ન વેચાણ",
+      "Tailoring": "સિલાઇ",
+      "Carpentry": "કાર્પેન્ટ્રી",
+      "Woodworking": "કાઠનું કામ",
+      "Agricultural Work": "કૃષિ કાર્ય",
+      "Electrician": "ઇલેક્ટ્રિશિયન",
+      "Electrical Wiring": "ઇલેક્ટ્રિકલ વાયરિંગ",
+      "Plumbing": "પ્લંબિંગ",
+      "Masonry": "મેસનરી",
+      "Bricklaying": "ઈંટો મુકવી",
+      "Housekeeping": "ઘર સંભાળ",
+      "Cleaning": "સફાઈ",
+      "Cooking": "રસોઈ",
+      "Childcare": "બાળક સંભાળ",
+      "Load Handling": "લોડ હેન્ડલિંગ",
+      "Tool Maintenance": "ઉપકરણ જાળવણી",
+      "Machine Operation": "મશીન ઓપરેશન",
+      "Driving": "કાર ચલાવવી",
+      "Scaffolding Safety": "સ્કેફોલ્ડિંગ સુરક્ષા",
       "Project Management": "પ્રોજેક્ટ મેનેજમેન્ટ",
       "JavaScript": "જાવાસ્ક્રિપ્ટ",
-      "Python": "પાયથોન",
-      "React": "રિયાક્ટ",
+      "Python": "પાયથન",
+      "React": "રિએક્ટ",
       "Node.js": "નોડ.જેએસ"
     },
     "experienceLabel": "અનુભવ *",
@@ -421,7 +442,7 @@
     "copySuccess": "લિંક ક્લિપબોર્ડ પર કૉપિ થઈ!",
     "failedCreate": "ચકાસણી બનાવવામાં નિષ્ફળ",
     "placeholders": {
-      "title": "દા.ત., સોફ્ટવેર ડેવલપર, સેલ્સ મેનેજર",
+      "title": "ઉદાહરણ: ઇલેક્ટ્રિશિયન, મિસ્ત્રી",
       "experience": "દા.ત., 0-2 વર્ષ, 2-5 વર્ષ, 5+ વર્ષ"
     }
   }

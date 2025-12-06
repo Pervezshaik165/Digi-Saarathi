@@ -96,32 +96,50 @@
     "noUploaded": "ఇంకా పత్రాలు అప్‌లోడ్ చేయబడలేదు.",
     "view": "పత్రం చూడండి",
     "delete": "తొలగించు",
-    "status": {
-      "rejected": "అడ్మిన్ ద్వారా తిరస్కరించబడింది — దయచేసి సరైన పత్రాన్ని మళ్లీ అప్‌లోడ్ చేయండి.",
-      "verified": "అడ్మిన్ ద్వారా ధృవీకరించబడింది/ఆమోదించబడింది.",
-      "pending": "అడ్మిన్ ధృవీకరణ కోసం వేచి ఉంది."
+    "skills": {
+      "Communication": "సంవాదం",
+      "Teamwork": "జట్టు పనితనం",
+      "Problem Solving": "సమస్య పరిష్కారం",
+      "Leadership": "నেতృత్వం",
+      "Time Management": "సమయ నిర్వహణ",
+      "Technical Skills": "సాంకేతిక నైపుణ్యాలు",
+      "Customer Service": "గ్రాహక సేవలు",
+      "Cash Handling": "నగదు నిర్వాహణ",
+      "Market Trading": "మార్కెట్ వాణిజ్యం",
+      "Food Vending": "ఆహార విక్రయుడు",
+      "Tailoring": "నేసిన పని",
+      "Carpentry": "కడప టాస్క్/కార్పెంట్రీ",
+      "Woodworking": "చెల్లిన పనులు",
+      "Agricultural Work": "వ్యవసాయ పని",
+      "Electrician": "లోకల్ ఎలక్ట్రిషియన్",
+      "Electrical Wiring": "ఎలక్ట్రికల్ వైరింగ్",
+      "Plumbing": "ప్లంబింగ్",
+      "Masonry": "రాళ్ళ పని",
+      "Bricklaying": "ఈట రాకెట్లు",
+      "Housekeeping": "ఇల్లు నిర్వహణ",
+      "Cleaning": "శుభ్రపరచడం",
+      "Cooking": "వంటను చేయడం",
+      "Childcare": "శిశు సంరక్షణ",
+      "Load Handling": "లోడ్ నిర్వహణ",
+      "Tool Maintenance": "ప్రత్యేక పరికర నిర్వహణ",
+      "Machine Operation": "యంత్రం నిర్వహణ",
+      "Driving": "డ్రైవింగ్",
+      "Scaffolding Safety": "స్కాఫోల్డింగ్ భద్రత",
+      "JavaScript": "జావాస్క్రిప్ట్",
+      "Python": "పైథాన్",
+      "React": "రియాక్ట్",
+      "Node.js": "నోడ్.జెఎస్"
     },
     "errors": {
-      "selectFile": "దయచేసి ఒక ఫైల్‌ను ఎంచుకోండి",
-      "cloudFail": "Cloudinary అప్‌లోడ్ విఫలమైంది",
-      "cloudError": "Cloud అప్‌లోడ్ లోపం",
-      "noFile": "ఫైల్ ఎంచుకోబడలేదు",
-      "selectType": "దయచేసి పత్రం రకాన్ని ఎంచుకోండి",
-      "fetchFailed": "పత్రాలను పొందడంలో విఫలమైంది",
-      "deleteFailed": "తొలగించడం విఫలమైంది",
       "uploadFailed": "అప్‌లోడ్ విఫలమైంది"
     },
     "warnings": {
-      "alreadyUploaded": "మీరు ఇప్పటికే ఒక {{type}} పత్రాన్ని అప్‌లోడ్ చేసారు."
+      "alreadyUploaded": "మీరు ఇప్పటికే {{type}} పత్రం అప్‌లోడ్ చేసారు."
     },
     "success": {
       "uploaded": "పత్రం అప్‌లోడ్ చేయబడింది!",
       "deleted": "పత్రం తొలగించబడింది"
     }
-  },
-  "common": {
-    "view": "View",
-    "seeAll": "See all"
   },
   "dashboard": {
     "welcome": "స్వాగతం {{name}}",
@@ -195,7 +213,7 @@
       "description": "ఉద్యోగ వివరణ"
     },
     "placeholders": {
-      "title": "ఉదా., సాఫ్ట్‌వేర్ డెవలపర్, సేల్స్ మేనేజర్",
+      "title": "ఉదా., ఎలక్ట్రిషియన్, మేసనరీ",
       "location": "ఉదా., హైదరాబాద్, బెంగళూరు లేదా రిమోట్",
       "experience": "ఉదా., 0-2 సంవత్సరాలు, 2-5 సంవత్సరాలు, 5+ సంవత్సరాలు",
       "description": "ఉద్యోగ బాధ్యతలు, అవసరాలు మరియు ప్రయోజనాలను వివరించండి..."
@@ -388,14 +406,34 @@
     },
     "skillsLabel": "ప్రదర్శించిన నైపుణ్యాలు",
     "skills": {
-      "Communication": "కమ్యూనికేషన్",
-      "Teamwork": "టీమ్‌వర్క్",
+      "Communication": "సంవాదం",
+      "Teamwork": "జట్టు పనితనం",
       "Problem Solving": "సమస్య పరిష్కారం",
-      "Leadership": "నాయకత్వం",
+      "Leadership": "నేతృత్వం",
       "Time Management": "సమయ నిర్వహణ",
       "Technical Skills": "సాంకేతిక నైపుణ్యాలు",
-      "Customer Service": "కస్టమర్ సర్వీస్",
-      "Project Management": "ప్రాజెక్ట్ మేనేజ్‌మెంట్",
+      "Customer Service": "గ్రాహక సేవలు",
+      "Cash Handling": "నగదు నిర్వాహణ",
+      "Market Trading": "మార్కెట్ వాణిజ్యం",
+      "Food Vending": "ఆహార విక్రయుడు",
+      "Tailoring": "నేసిన పని",
+      "Carpentry": "కడప టాస్క్/కార్పెంట్రీ",
+      "Woodworking": "చెల్లిన పనులు",
+      "Agricultural Work": "వ్యవసాయ పని",
+      "Electrician": "లోకల్ ఎలక్ట్రిషియన్",
+      "Electrical Wiring": "ఎలక్ట్రికల్ వైరింగ్",
+      "Plumbing": "ప్లంబింగ్",
+      "Masonry": "రాళ్ళ పని",
+      "Bricklaying": "ఈట రాకెట్లు",
+      "Housekeeping": "ఇల్లు నిర్వహణ",
+      "Cleaning": "శుభ్రపరచడం",
+      "Cooking": "వంటను చేయడం",
+      "Childcare": "శిశు సంరక్షణ",
+      "Load Handling": "లోడ్ నిర్వహణ",
+      "Tool Maintenance": "ప్రత్యేక పరికర నిర్వహణ",
+      "Machine Operation": "యంత్రం నిర్వహణ",
+      "Driving": "డ్రైవింగ్",
+      "Scaffolding Safety": "స్కాఫోల్డింగ్ భద్రత",
       "JavaScript": "జావాస్క్రిప్ట్",
       "Python": "పైథాన్",
       "React": "రియాక్ట్",
@@ -421,7 +459,7 @@
     "copySuccess": "లింక్ క్లిప్‌బోర్డ్‌కు కాపీ చేయబడింది!",
     "failedCreate": "ధృవీకరణను సృష్టించడం విఫలమైంది",
     "placeholders": {
-      "title": "ఉదా., సాఫ్ట్‌వేర్ డెవలపర్, సేల్స్ మేనేజర్",
+      "title": "ఉదా., ఎలక్ట్రిషియన్, మేసనరీ",
       "experience": "ఉదా., 0-2 సంవత్సరాలు, 2-5 సంవత్సరాలు, 5+ సంవత్సరాలు"
     }
   }
