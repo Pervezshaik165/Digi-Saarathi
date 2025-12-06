@@ -195,7 +195,7 @@
       "description": "ജോലി വിവരണം"
     },
     "placeholders": {
-      "title": "ഉദാ., സോഫ്റ്റ്‌വെയർ ഡെവലപ്പർ, സെയിൽസ് മാനേജർ",
+      "title": "ഉദാഹരണം: ഇലക്ട്രിഷ്യൻ, മെസണറി",
       "location": "ഉദാ., കൊച്ചി, തിരുവനന്തപുരം അല്ലെങ്കിൽ റിമോട്ട്",
       "experience": "ഉദാ., 0-2 വർഷം, 2-5 വർഷം, 5+ വർഷം",
       "description": "ജോലി ഉത്തരവാദിത്തങ്ങൾ, ആവശ്യകതകൾ, ആനുകൂല്യങ്ങൾ എന്നിവ വിവരിക്കുക..."
@@ -396,13 +396,33 @@
     "skillsLabel": "പ്രദർശിപ്പിച്ച കഴിവുകൾ",
     "skills": {
       "Communication": "ആശയവിനിമയം",
-      "Teamwork": "ടീം വർക്ക്",
+      "Teamwork": "ടീം വേർക്ക്",
       "Problem Solving": "പ്രശ്ന പരിഹാരം",
       "Leadership": "നേതൃത്വം",
-      "Time Management": "സമയ മാനേജ്മെന്റ്",
+      "Time Management": "സമയം നിയന്ത്രണം",
       "Technical Skills": "സാങ്കേതിക കഴിവുകൾ",
       "Customer Service": "ഉപഭോക്തൃ സേവനം",
-      "Project Management": "പ്രോജക്റ്റ് മാനേജ്മെന്റ്",
+      "Cash Handling": "നഗദു കൈകാര്യം",
+      "Market Trading": "ബസാർ വ്യാപാരം",
+      "Food Vending": "ഭക്ഷ്യ വിൽപ്പന",
+      "Tailoring": "ദർജി ജോലി",
+      "Carpentry": "തക്കിടമാരുടെ ജോലി",
+      "Woodworking": "മരം കച്ചവ്",
+      "Agricultural Work": "കൃഷി പ്രവൃത്തികൾ",
+      "Electrician": "ഇലക്ട്രിഷ്യൻ",
+      "Electrical Wiring": "വൈദ്യുത വയറിംഗ്",
+      "Plumbing": "പ്ലംബിംഗ്",
+      "Masonry": "മെസനറി",
+      "Bricklaying": "ഇട്ടിടുപ്പ്",
+      "Housekeeping": "വീട് പരിപാലനം",
+      "Cleaning": "ശുചീകരണം",
+      "Cooking": "പാചകം",
+      "Childcare": "കുട്ടികളുടെ പരിപാലനം",
+      "Load Handling": "ഭാരം കൈകാര്യം",
+      "Tool Maintenance": "ഉപകരണ പരിപാലനം",
+      "Machine Operation": "യന്ത്രം പ്രവർത്തനം",
+      "Driving": "ഗതാഗതം/നടത്തൽ",
+      "Scaffolding Safety": "സ്‌കാഫോൾഡിങ് സുരക്ഷ",
       "JavaScript": "ജാവാസ്ക്രിപ്റ്റ്",
       "Python": "പൈത്തൺ",
       "React": "റിയാക്റ്റ്",
@@ -428,7 +448,7 @@
     "copySuccess": "ലിങ്ക് ക്ലിപ്പ്ബോർഡിലേക്ക് പകർത്തി!",
     "failedCreate": "പരിശോധന സൃഷ്ടിക്കുന്നതിൽ പരാജയപ്പെട്ടു",
     "placeholders": {
-      "title": "ഉദാ., സോഫ്റ്റ്‌വെയർ ഡെവലപ്പർ, സെയിൽസ് മാനേജർ",
+      "title": "ഉദാഹരണം: ഇലക്ട്രിഷ്യൻ, മെസണറി",
       "experience": "ഉദാ., 0-2 വർഷം, 2-5 വർഷം, 5+ വർഷം"
     }
   }

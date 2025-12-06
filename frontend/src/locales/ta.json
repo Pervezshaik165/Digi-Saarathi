@@ -96,32 +96,50 @@
     "noUploaded": "இதுவரை ஆவணங்கள் எதுவும் பதிவேற்றப்படவில்லை.",
     "view": "ஆவணத்தைப் பார்",
     "delete": "நீக்கு",
-    "status": {
-      "rejected": "நிர்வாகியால் நிராகரிக்கப்பட்டது — சரியான ஆவணத்தை மீண்டும் பதிவேற்றவும்.",
-      "verified": "நிர்வாகியால் சரிபார்க்கப்பட்டது/அங்கீகரிக்கப்பட்டது.",
-      "pending": "நிர்வாகி சரிபார்ப்பதற்காக காத்திருக்கிறது."
+    "skills": {
+      "Communication": "தொடர்பு",
+      "Teamwork": "குழு வேலை",
+      "Problem Solving": "பிரச்சனை தீர்க்கல்",
+      "Leadership": "முந்துதல்",
+      "Time Management": "நேர மேலாண்மை",
+      "Technical Skills": "தந்திரக் திறன்கள்",
+      "Customer Service": "வாடிக்கையாளர் சேவை",
+      "Cash Handling": "நகદ பொறுப்பு",
+      "Market Trading": "சந்தை வர்த்தகம்",
+      "Food Vending": "உணவு விற்பனை",
+      "Tailoring": "தையல்",
+      "Carpentry": "தலைப்பணி/மரப்பணிகள்",
+      "Woodworking": "மரம் வேலை",
+      "Agricultural Work": "விவசாயப் பணிகள்",
+      "Electrician": "மின் நிபுணர்",
+      "Electrical Wiring": "மின்கம்பி இணைப்பு",
+      "Plumbing": "நலபாதுகாப்பு/பிளம்பிங்",
+      "Masonry": "கல்லறை வேலை/முகில்சேதி",
+      "Bricklaying": "கூடு சுவர் வேலை",
+      "Housekeeping": "வீட்டுப் பணி",
+      "Cleaning": "தூய்மை",
+      "Cooking": "உணவு தயாரித்தல்",
+      "Childcare": "குழந்தை பராமரிப்பு",
+      "Load Handling": "பரிதாபம் சுமை நிர்வாகம்",
+      "Tool Maintenance": "கருவி பராமரிப்பு",
+      "Machine Operation": "யந்திர செயல்பாடு",
+      "Driving": "இயக்குதல்",
+      "Scaffolding Safety": "அமைப்புப் பாதுகாப்பு",
+      "JavaScript": "ஜாவாஸ்கிரிப்ட்",
+      "Python": "பைத்தான்",
+      "React": "ரியாக்ட்",
+      "Node.js": "நோட்.ஜெ.எஸ்"
     },
     "errors": {
-      "selectFile": "தயவுசெய்து ஒரு கோப்பைத் தேர்ந்தெடுக்கவும்",
-      "cloudFail": "Cloudinary பதிவேற்றம் தோல்வியடைந்தது",
-      "cloudError": "Cloud பதிவேற்ற பிழை",
-      "noFile": "கோப்பு தேர்ந்தெடுக்கப்படவில்லை",
-      "selectType": "தயவுசெய்து ஆவண வகையைத் தேர்ந்தெடுக்கவும்",
-      "fetchFailed": "ஆவணங்களைப் பெற முடியவில்லை",
-      "deleteFailed": "நீக்குதல் தோல்வியடைந்தது",
-      "uploadFailed": "பதிவேற்றம் தோல்வியடைந்தது"
+      "uploadFailed": "பதிவேற்றம் தோல்வியுற்றது"
     },
     "warnings": {
-      "alreadyUploaded": "நீங்கள் ஏற்கனவே ஒரு {{type}} ஆவணத்தைப் பதிவேற்றியுள்ளீர்கள்."
+      "alreadyUploaded": "நீங்கள் ஏற்கனவே {{type}} ஆவணத்தைப் பதிவேற்றியுள்ளீர்கள்."
     },
     "success": {
       "uploaded": "ஆவணம் பதிவேற்றப்பட்டது!",
       "deleted": "ஆவணம் நீக்கப்பட்டது"
     }
-  },
-  "common": {
-    "view": "View",
-    "seeAll": "See all"
   },
   "dashboard": {
     "welcome": "வரவேற்கிறோம் {{name}}",
@@ -195,7 +213,7 @@
       "description": "வேலை விளக்கம்"
     },
     "placeholders": {
-      "title": "எ.கா., மென்பொருள் உருவாக்குநர், விற்பனை மேலாளர்",
+      "title": "எ.கா., எலக்ட்ரிஷியன், மெசனர்",
       "location": "எ.கா., சென்னை, மதுரை அல்லது தொலைநிலை",
       "experience": "எ.கா., 0-2 ஆண்டுகள், 2-5 ஆண்டுகள், 5+ ஆண்டுகள்",
       "description": "வேலை பொறுப்புகள், தேவைகள் மற்றும் நன்மைகளை விவரிக்கவும்..."
@@ -389,17 +407,37 @@
     "skillsLabel": "வெளிப்படுத்தப்பட்ட திறன்கள்",
     "skills": {
       "Communication": "தொடர்பு",
-      "Teamwork": "குழுப்பணி",
-      "Problem Solving": "சிக்கல் தீர்த்தல்",
-      "Leadership": "தலைமைத்துவம்",
+      "Teamwork": "குழு வேலை",
+      "Problem Solving": "பிரச்சனை தீர்க்கல்",
+      "Leadership": "முந்துதல்",
       "Time Management": "நேர மேலாண்மை",
-      "Technical Skills": "தொழில்நுட்ப திறன்கள்",
+      "Technical Skills": "தந்திரக் திறன்கள்",
       "Customer Service": "வாடிக்கையாளர் சேவை",
-      "Project Management": "திட்ட மேலாண்மை",
+      "Cash Handling": "நகদ பொறுப்பு",
+      "Market Trading": "சந்தை வர்த்தகம்",
+      "Food Vending": "உணவு விற்பனை",
+      "Tailoring": "தையல்",
+      "Carpentry": "தலைப்பணி/மரப்பணிகள்",
+      "Woodworking": "மரம் வேலை",
+      "Agricultural Work": "விவசாயப் பணிகள்",
+      "Electrician": "மின் நிபுணர்",
+      "Electrical Wiring": "மின்கம்பி இணைப்பு",
+      "Plumbing": "நலபாதுகாப்பு/பிளம்பிங்",
+      "Masonry": "கல்லறை வேலை/முகில்சேதி",
+      "Bricklaying": "கூடு சுவர் வேலை",
+      "Housekeeping": "வீட்டுப் பணி",
+      "Cleaning": "தூய்மை",
+      "Cooking": "உணவு தயாரித்தல்",
+      "Childcare": "குழந்தை பராமரிப்பு",
+      "Load Handling": "பரிதாபம் சுமை நிர்வாகம்",
+      "Tool Maintenance": "கருவி பராமரிப்பு",
+      "Machine Operation": "யந்திர செயல்பாடு",
+      "Driving": "இயக்குதல்",
+      "Scaffolding Safety": "அமைப்புப் பாதுகாப்பு",
       "JavaScript": "ஜாவாஸ்கிரிப்ட்",
-      "Python": "பைதான்",
+      "Python": "பைத்தான்",
       "React": "ரியாக்ட்",
-      "Node.js": "நோட்.ஜேஎஸ்"
+      "Node.js": "நோட்.ஜெ.எஸ்"
     },
     "experienceLabel": "அனுபவம் *",
     "startDate": "தொடக்க தேதி *",
@@ -421,7 +459,7 @@
     "copySuccess": "இணைப்பு கிளிப்போர்டுக்கு நகலெடுக்கப்பட்டது!",
     "failedCreate": "சரிபார்ப்பை உருவாக்க முடியவில்லை",
     "placeholders": {
-      "title": "எ.கா., மென்பொருள் உருவாக்குநர், விற்பனை மேலாளர்",
+      "title": "எ.கா., மின் நிபுணர், கல்லறை வேலை",
       "experience": "எ.கா., 0-2 ஆண்டுகள், 2-5 ஆண்டுகள், 5+ ஆண்டுகள்"
     }
   }

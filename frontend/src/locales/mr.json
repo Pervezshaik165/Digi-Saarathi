@@ -195,7 +195,7 @@
       "description": "नोकरीचे वर्णन"
     },
     "placeholders": {
-      "title": "उदा., सॉफ्टवेअर डेव्हलपर, सेल्स मॅनेजर",
+      "title": "उदा., इलेक्ट्रिशियन, मेसनरी",
       "location": "उदा., मुंबई, पुणे किंवा रिमोट",
       "experience": "उदा., ०-२ वर्षे, २-५ वर्षे, ५+ वर्षे",
       "description": "नोकरीच्या जबाबदाऱ्या, आवश्यकता आणि फायदे वर्णन करा..."
@@ -395,7 +395,27 @@
       "Time Management": "वेळ व्यवस्थापन",
       "Technical Skills": "तांत्रिक कौशल्ये",
       "Customer Service": "ग्राहक सेवा",
-      "Project Management": "प्रकल्प व्यवस्थापन",
+      "Cash Handling": "रोख हाताळणी",
+      "Market Trading": "बाजार व्यवहार",
+      "Food Vending": "अन्न विक्री",
+      "Tailoring": "सिलाई काम",
+      "Carpentry": "सूतकाम/कारपेन्ट्री",
+      "Woodworking": "लाकूड काम",
+      "Agricultural Work": "कृषी काम",
+      "Electrician": "विद्युत कामगार",
+      "Electrical Wiring": "विद्युत वायरिंग",
+      "Plumbing": "प्लंबिंग",
+      "Masonry": "मेसनरी",
+      "Bricklaying": "वेडे बांधणी (इटांची कामे)",
+      "Housekeeping": "गृह व्यवस्था",
+      "Cleaning": "स्वच्छता",
+      "Cooking": "स्वयंपाक",
+      "Childcare": "पालकत्व काळजी",
+      "Load Handling": "भार हाताळणी",
+      "Tool Maintenance": "साधन देखभाल",
+      "Machine Operation": "यंत्र ऑपरेशन",
+      "Driving": "वाहन चालवणे",
+      "Scaffolding Safety": "मंच सुरक्षा",
       "JavaScript": "जावास्क्रिप्ट",
       "Python": "पायथन",
       "React": "रिएक्ट",
@@ -421,7 +441,7 @@
     "copySuccess": "दुवा क्लिपबोर्डवर कॉपी केला!",
     "failedCreate": "सत्यापन तयार करण्यात अयशस्वी",
     "placeholders": {
-      "title": "उदा., सॉफ्टवेअर डेव्हलपर, सेल्स मॅनेजर",
+      "title": "उदा., इलेक्ट्रिशियन, राजमिस्त्री",
       "experience": "उदा., ०-२ वर्षे, २-५ वर्षे, ५+ वर्षे"
     }
   }

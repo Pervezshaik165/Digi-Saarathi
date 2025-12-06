@@ -35,13 +35,28 @@ const CreateVerification = () => {
     "Problem Solving",
     "Leadership",
     "Time Management",
-    "Technical Skills",
     "Customer Service",
-    "Project Management",
-    "JavaScript",
-    "Python",
-    "React",
-    "Node.js",
+    "Cash Handling",
+    "Market Trading",
+    "Food Vending",
+    "Tailoring",
+    "Carpentry",
+    "Woodworking",
+    "Agricultural Work",
+    "Electrician",
+    "Electrical Wiring",
+    "Plumbing",
+    "Masonry",
+    "Bricklaying",
+    "Housekeeping",
+    "Cleaning",
+    "Cooking",
+    "Childcare",
+    "Load Handling",
+    "Tool Maintenance",
+    "Machine Operation",
+    "Driving",
+    "Scaffolding Safety",
   ];
 
   const handleSkillToggle = (skill) => {
@@ -345,7 +360,7 @@ const CreateVerification = () => {
                 onChange={(e) =>
                   setFormData({ ...formData, jobRole: e.target.value })
                 }
-                placeholder={t('createVerification.placeholders.title', 'e.g., Software Developer, Sales Manager')}
+                placeholder={t('createVerification.placeholders.title', 'e.g., Electritian, Mason')}
                 className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
                 required
               />
