@@ -1,0 +1,32 @@
+const skills = [
+  "Communication",
+  "Teamwork",
+  "Problem Solving",
+  "Leadership",
+  "Time Management",
+  "Customer Service",
+  "Cash Handling",
+  "Market Trading",
+  "Food Vending",
+  "Tailoring",
+  "Carpentry",
+  "Woodworking",
+  "Agricultural Work",
+  "Electrician",
+  "Electrical Wiring",
+  "Plumbing",
+  "Masonry",
+  "Bricklaying",
+  "Housekeeping",
+  "Cleaning",
+  "Cooking",
+  "Childcare",
+  "Load Handling",
+  "Tool Maintenance",
+  "Machine Operation",
+  "Driving",
+  "Scaffolding Safety",
+  "Project Management"
+];
+
+export default skills;

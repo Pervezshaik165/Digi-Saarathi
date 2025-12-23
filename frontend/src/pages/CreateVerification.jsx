@@ -4,6 +4,7 @@ import { AppContext } from "../context/AppContext";
 import EmployerHeader from "../components/employer/EmployerHeader";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
+import skills from "../constants/skills";
 import { QRCodeSVG } from "qrcode.react";
 
 const CreateVerification = () => {
@@ -29,35 +30,7 @@ const CreateVerification = () => {
   });
   const { t } = useTranslation();
 
-  const availableSkills = [
-    "Communication",
-    "Teamwork",
-    "Problem Solving",
-    "Leadership",
-    "Time Management",
-    "Customer Service",
-    "Cash Handling",
-    "Market Trading",
-    "Food Vending",
-    "Tailoring",
-    "Carpentry",
-    "Woodworking",
-    "Agricultural Work",
-    "Electrician",
-    "Electrical Wiring",
-    "Plumbing",
-    "Masonry",
-    "Bricklaying",
-    "Housekeeping",
-    "Cleaning",
-    "Cooking",
-    "Childcare",
-    "Load Handling",
-    "Tool Maintenance",
-    "Machine Operation",
-    "Driving",
-    "Scaffolding Safety",
-  ];
+  const availableSkills = skills;
 
   const handleSkillToggle = (skill) => {
     setFormData({
