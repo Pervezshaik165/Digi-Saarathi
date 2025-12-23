@@ -4,6 +4,7 @@ import { AppContext } from "../context/AppContext";
 import EmployerHeader from "../components/employer/EmployerHeader";
 import { toast } from "react-toastify";
 import { useTranslation } from 'react-i18next';
+import skills from "../constants/skills";
 
 const PostJob = () => {
   const { api, employerToken } = useContext(AppContext);
@@ -43,18 +44,7 @@ const PostJob = () => {
     checkDocs();
   }, []);
 
-  const availableSkills = [
-    "JavaScript",
-    "Python",
-    "React",
-    "Node.js",
-    "Communication",
-    "Teamwork",
-    "Problem Solving",
-    "Leadership",
-    "Project Management",
-    "Customer Service",
-  ];
+  const availableSkills = skills;
 
   const handleSkillToggle = (skill) => {
     setFormData({
@@ -217,7 +207,7 @@ const PostJob = () => {
                       onChange={() => handleSkillToggle(skill)}
                       className="mr-2"
                     />
-                    <span className="text-sm">{skill}</span>
+                    <span className="text-sm">{t(`createVerification.skills.${skill}`, skill)}</span>
                   </label>
                 ))}
               </div>
